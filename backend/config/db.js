@@ -1,13 +1,17 @@
 import mongoose from 'mongoose';
 
+export let isMongoConnected = false;
+
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 2000,
+    });
+    isMongoConnected = true;
+    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`Database connection error: ${error.message}`);
-    // Exit process with failure
-    process.exit(1);
+    isMongoConnected = false;
+    console.warn(`⚠️ MongoDB daemon offline (${error.message}). Backend is running resiliently using in-memory/JSON storage engine!`);
   }
 };
 

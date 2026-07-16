@@ -34,19 +34,32 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
     }, 1000);
   };
 
-  const handleSendOtp = (e) => {
-    e.preventDefault();
+  const handleSendOtp = async (e) => {
+    if (e) e.preventDefault();
     if (!email) {
       setError('Please enter your email address first.');
       return;
     }
     setLoading(true);
     setError(null);
-    setTimeout(() => {
-      setLoading(false);
+    setSuccessMsg(null);
+
+    try {
+      const res = await fetch('http://localhost:5001/api/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to send OTP code');
+
       setOtpSent(true);
-      setSuccessMsg(`We sent a 6-digit code to ${email}`);
-    }, 900);
+      setSuccessMsg(`${data.message}${data.devOtp ? ` (Dev Code: ${data.devOtp})` : ''}`);
+    } catch (err) {
+      setError(err.message || 'Error communicating with authentication server.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -77,20 +90,29 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
         return;
       }
       setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        const mockUser = {
-          _id: 'otp-' + Date.now(),
-          name: email.split('@')[0],
-          email: email,
-          role: 'member',
-          token: 'otp-jwt-token'
-        };
-        setSuccessMsg('OTP Verified successfully!');
+      try {
+        const res = await fetch('http://localhost:5001/api/auth/verify-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email.trim(),
+            otp: otpCode.trim(),
+            password: password ? password.trim() : undefined,
+            name: name ? name.trim() : undefined,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || 'Invalid verification code');
+
+        setSuccessMsg(password ? '✨ OTP Verified & Password saved for your account!' : '✨ OTP Verified successfully!');
         setTimeout(() => {
-          if (onAuthSuccess) onAuthSuccess(mockUser);
+          if (onAuthSuccess) onAuthSuccess(data);
         }, 700);
-      }, 900);
+      } catch (err) {
+        setError(err.message || 'Failed to verify OTP code.');
+      } finally {
+        setLoading(false);
+      }
       return;
     }
 
@@ -101,7 +123,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
       }
       setLoading(true);
       const endpoint = isRegistering ? 'register' : 'login';
-      const payload = isRegistering ? { name, email, password } : { email, password };
+      const payload = isRegistering ? { name: name.trim(), email: email.trim(), password: password.trim() } : { email: email.trim(), password: password.trim() };
 
       try {
         const response = await fetch(`http://localhost:5001/api/auth/${endpoint}`, {
@@ -117,18 +139,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
           if (onAuthSuccess) onAuthSuccess(data);
         }, 700);
       } catch (err) {
-        console.warn('Backend connection offline/simulated:', err.message);
-        setSuccessMsg('Validating member credentials...');
-        setTimeout(() => {
-          const mockUser = {
-            _id: 'pwd-' + Date.now(),
-            name: name || email.split('@')[0],
-            email: email,
-            role: 'member',
-            token: 'mock-jwt-token'
-          };
-          if (onAuthSuccess) onAuthSuccess(mockUser);
-        }, 700);
+        setError(err.message || 'Invalid email or password.');
       } finally {
         setLoading(false);
       }
@@ -159,17 +170,19 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
       </div>
 
       {/* Transparent Glass Container Wrapper */}
-      <div className="relative z-10 bg-white/[0.08] backdrop-blur-2xl rounded-3xl sm:rounded-[36px] p-6 sm:p-10 md:p-12 shadow-[0_30px_90px_rgba(0,0,0,0.85)] border border-white/20 my-auto max-w-[480px] w-full text-white">
+      <div className="relative z-10 bg-white/[0.08] backdrop-blur-2xl rounded-2xl sm:rounded-3xl md:rounded-[36px] p-4 sm:p-8 md:p-12 shadow-[0_30px_90px_rgba(0,0,0,0.85)] border border-white/20 my-auto max-w-[480px] w-full max-h-[92vh] overflow-y-auto text-white">
         {/* Main Center Container */}
         <div className="w-full max-w-[420px] mx-auto z-10 animate-fadeIn my-auto py-2">
 
           {/* Brand Header with Logo */}
           <div className="flex flex-col items-center justify-center text-center mb-8">
-            <img
-              src="/cozy-cup-logo.png"
-              alt="Cozy Cup Logo"
-              className="w-16 h-16 sm:w-20 sm:h-20 object-contain mb-3.5 rounded-full border border-white/25 shadow-lg bg-white/10 backdrop-blur-md p-1"
-            />
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border border-white/25 shadow-lg bg-white/10">
+              <img
+                src="/cozy-cup-logo.png"
+                alt="Cozy Cup Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
             <h1 className="font-display italic font-bold text-4xl sm:text-[42px] text-gold tracking-tight leading-none drop-shadow-sm">
               Cozy Cup
             </h1>
@@ -219,11 +232,11 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
           </div>
 
           {/* Auth Method Pill Switcher (Magic link vs OTP code vs Password) */}
-          <div className="bg-white/10 p-1.5 rounded-full flex gap-1 mb-6 border border-white/15 text-xs font-medium backdrop-blur-md">
+          <div className="bg-white/10 p-1 sm:p-1.5 rounded-full flex gap-1 mb-6 border border-white/15 text-[11px] sm:text-xs font-medium backdrop-blur-md">
             <button
               type="button"
               onClick={() => { setAuthMethod('magic'); setError(null); setSuccessMsg(null); }}
-              className={`flex-1 py-2.5 px-3 rounded-full transition-all text-center ${authMethod === 'magic'
+              className={`flex-1 py-2 sm:py-2.5 px-1.5 sm:px-3 rounded-full transition-all text-center ${authMethod === 'magic'
                 ? 'bg-white text-[#201B15] font-semibold shadow-sm scale-[1.01]'
                 : 'text-white/70 hover:text-white'
                 }`}
@@ -233,7 +246,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
             <button
               type="button"
               onClick={() => { setAuthMethod('otp'); setError(null); setSuccessMsg(null); }}
-              className={`flex-1 py-2.5 px-3 rounded-full transition-all text-center ${authMethod === 'otp'
+              className={`flex-1 py-2 sm:py-2.5 px-1.5 sm:px-3 rounded-full transition-all text-center ${authMethod === 'otp'
                 ? 'bg-white text-[#201B15] font-semibold shadow-sm scale-[1.01]'
                 : 'text-white/70 hover:text-white'
                 }`}
@@ -243,7 +256,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
             <button
               type="button"
               onClick={() => { setAuthMethod('password'); setError(null); setSuccessMsg(null); }}
-              className={`flex-1 py-2.5 px-3 rounded-full transition-all text-center ${authMethod === 'password'
+              className={`flex-1 py-2 sm:py-2.5 px-1.5 sm:px-3 rounded-full transition-all text-center ${authMethod === 'password'
                 ? 'bg-white text-[#201B15] font-semibold shadow-sm scale-[1.01]'
                 : 'text-white/70 hover:text-white'
                 }`}
@@ -302,30 +315,48 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
               </div>
             )}
 
-            {/* If OTP mode and OTP was sent, show OTP Code box */}
+            {/* If OTP mode and OTP was sent, show OTP Code box + Optional Password Creation box */}
             {authMethod === 'otp' && otpSent && (
-              <div>
-                <div className="flex justify-between items-center mb-1.5">
-                  <label className="block text-[11px] font-mono tracking-widest text-white/75 uppercase">
-                    6-DIGIT CODE
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() => { setOtpSent(false); setOtpCode(''); }}
-                    className="text-xs text-white/70 hover:text-white underline"
-                  >
-                    Change email
-                  </button>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between items-center mb-1.5">
+                    <label className="block text-[11px] font-mono tracking-widest text-white/75 uppercase">
+                      6-DIGIT CODE *
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => { setOtpSent(false); setOtpCode(''); }}
+                      className="text-xs text-white/70 hover:text-white underline"
+                    >
+                      Change email
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    required
+                    maxLength="6"
+                    value={otpCode}
+                    onChange={(e) => setOtpCode(e.target.value)}
+                    placeholder="• • • • • •"
+                    className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/20 rounded-xl sm:rounded-2xl py-3.5 px-4 border border-white/20 text-center tracking-[0.5em] font-mono text-lg text-white placeholder-white/40 focus:outline-none focus:border-white shadow-sm transition-all backdrop-blur-md"
+                  />
                 </div>
-                <input
-                  type="text"
-                  required
-                  maxLength="6"
-                  value={otpCode}
-                  onChange={(e) => setOtpCode(e.target.value)}
-                  placeholder="• • • • • •"
-                  className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/20 rounded-xl sm:rounded-2xl py-3.5 px-4 border border-white/20 text-center tracking-[0.5em] font-mono text-lg text-white placeholder-white/40 focus:outline-none focus:border-white shadow-sm transition-all backdrop-blur-md"
-                />
+
+                <div className="pt-2 border-t border-white/10">
+                  <label className="block text-[11px] font-mono tracking-widest text-white/75 uppercase mb-1.5">
+                    CREATE PASSWORD (FOR FUTURE LOGINS)
+                  </label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Create a password (Optional)"
+                    className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/20 rounded-xl sm:rounded-2xl py-3 px-4 border border-white/20 text-sm text-white placeholder-white/45 focus:outline-none focus:border-white shadow-sm transition-all backdrop-blur-md"
+                  />
+                  <p className="text-[11px] text-white/50 mt-1">
+                    Setting a password allows you to sign in instantly via the Password tab next time.
+                  </p>
+                </div>
               </div>
             )}
 

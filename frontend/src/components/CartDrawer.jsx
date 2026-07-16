@@ -3,17 +3,17 @@ import React from 'react'
 export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem, onCheckout }) {
   if (!isOpen) return null
 
-  // Calculate total price from items strings like "$22 / 12oz"
+  // Calculate total price from items strings like "₹650 / 340g" or "₹280 / cup"
   const calculateTotal = () => {
     return cart.reduce((sum, item) => {
-      const numStr = item.price ? item.price.replace(/[^0-9.]/g, '') : '20'
-      const priceVal = parseFloat(numStr) || 20
+      const numStr = item.price ? item.price.replace(/[^0-9.]/g, '') : '350'
+      const priceVal = parseFloat(numStr) || 350
       return sum + priceVal * (item.quantity || 1)
     }, 0)
   }
 
   const total = calculateTotal()
-  const freeShippingThreshold = 50
+  const freeShippingThreshold = 1500
   const progressToFreeShipping = Math.min(100, (total / freeShippingThreshold) * 100)
 
   return (
@@ -25,10 +25,10 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
       />
 
       {/* Side Drawer Panel */}
-      <div className="relative z-10 w-full max-w-md bg-[#FCFAF6] text-[#201B15] h-full shadow-2xl flex flex-col justify-between overflow-hidden border-l border-[#201B15]/10 animate-slideLeft">
+      <div className="relative z-10 w-full max-w-[100vw] sm:max-w-md bg-[#FCFAF6] text-[#201B15] h-full shadow-2xl flex flex-col justify-between overflow-hidden border-l border-[#201B15]/10 animate-slideLeft">
         
         {/* Header */}
-        <div className="p-6 border-b border-[#201B15]/10 flex items-center justify-between bg-white">
+        <div className="p-4 sm:p-6 border-b border-[#201B15]/10 flex items-center justify-between bg-white">
           <div className="flex items-center gap-2.5">
             <h2 className="font-display italic font-bold text-2xl text-[#201B15]">Your Coffee Cart</h2>
             <span className="bg-[#201B15] text-white text-xs font-mono font-bold px-2.5 py-0.5 rounded-full">
@@ -51,12 +51,12 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
           <div className="flex justify-between text-[12px] font-mono mb-1.5 text-[#201B15]/80">
             {total >= freeShippingThreshold ? (
               <span className="font-bold text-emerald-800 flex items-center gap-1.5">
-                <span>🎉 You unlocked FREE Direct Trade Shipping!</span>
+                <span>🎉 You unlocked FREE Express Shipping in India!</span>
               </span>
             ) : (
-              <span>Add <b>${(freeShippingThreshold - total).toFixed(2)}</b> more for FREE Shipping</span>
+              <span>Add <b>₹{(freeShippingThreshold - total).toLocaleString('en-IN')}</b> more for FREE Shipping</span>
             )}
-            <span>${total.toFixed(2)} / ${freeShippingThreshold}</span>
+            <span>₹{total.toLocaleString('en-IN')} / ₹{freeShippingThreshold.toLocaleString('en-IN')}</span>
           </div>
           <div className="w-full h-1.5 bg-black/10 rounded-full overflow-hidden">
             <div 
@@ -147,22 +147,22 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
             <div className="space-y-1.5 text-sm font-mono">
               <div className="flex justify-between text-[#201B15]/70">
                 <span>Subtotal ({cart.reduce((totalQty, i) => totalQty + (i.quantity || 1), 0)} items)</span>
-                <span>${total.toFixed(2)}</span>
+                <span>₹{total.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-[#201B15]/70">
                 <span>Shipping</span>
-                <span>{total >= freeShippingThreshold ? 'FREE' : '$4.99'}</span>
+                <span>{total >= freeShippingThreshold ? 'FREE' : '₹99'}</span>
               </div>
               <div className="flex justify-between font-bold text-base pt-2 border-t border-[#201B15]/10 text-[#201B15]">
                 <span>Total Due</span>
-                <span>${(total + (total >= freeShippingThreshold ? 0 : 4.99)).toFixed(2)}</span>
+                <span>₹{(total + (total >= freeShippingThreshold ? 0 : 99)).toLocaleString('en-IN')}</span>
               </div>
             </div>
 
             <button
               type="button"
               onClick={() => {
-                alert(`Proceeding to checkout with ${cart.length} coffee lots ($${total.toFixed(2)})!`)
+                alert(`Proceeding to checkout with ${cart.length} coffee items (Total: ₹${(total + (total >= freeShippingThreshold ? 0 : 99)).toLocaleString('en-IN')})!`)
                 if (onCheckout) onCheckout()
               }}
               className="w-full bg-[#201B15] hover:bg-[#322A21] active:scale-[0.99] text-white rounded-2xl py-4 font-semibold text-sm shadow-xl transition-all flex items-center justify-center gap-2"
