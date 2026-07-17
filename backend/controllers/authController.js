@@ -7,9 +7,31 @@ import { isMongoConnected } from '../config/db.js';
 const localUsersMap = new Map();
 const otpStoreMap = new Map();
 
+// Helper to save user in resilient memory map under both _id and email keys
+const saveUserLocally = (user) => {
+  if (!user) return;
+  if (user.email) localUsersMap.set(user.email.toLowerCase().trim(), user);
+  if (user._id) localUsersMap.set(user._id.toString(), user);
+};
+
+// Helper to find user in resilient memory map by either _id, email, or googleId
+const findUserLocally = (identifier) => {
+  if (!identifier) return null;
+  const key = identifier.toString().toLowerCase().trim();
+  if (localUsersMap.has(key)) return localUsersMap.get(key);
+  if (localUsersMap.has(identifier.toString())) return localUsersMap.get(identifier.toString());
+  // Search values directly as fallback
+  for (const u of localUsersMap.values()) {
+    if (u._id && u._id.toString() === identifier.toString()) return u;
+    if (u.email && u.email.toLowerCase() === key) return u;
+    if (u.googleId && u.googleId.toString() === identifier.toString()) return u;
+  }
+  return null;
+};
+
 // Helper to generate JWT token
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET || 'fallback_jwt_secret_key_123', {
+const generateToken = (_id) => {
+  return jwt.sign({ id: _id }, process.env.JWT_SECRET || 'fallback_jwt_secret_key_123', {
     expiresIn: '30d',
   });
 };
@@ -23,6 +45,27 @@ const hashPasswordLocal = async (plainPassword) => {
 const matchPasswordLocal = async (plainPassword, hashedPassword) => {
   if (!hashedPassword) return false;
   return await bcrypt.compare(plainPassword, hashedPassword);
+};
+
+// Helper to attach HTTP-only JWT cookie via cookie-parser and send JSON response
+const sendTokenResponse = (res, user, statusCode = 200, message = 'Success') => {
+  const token = generateToken(user._id || user.email);
+
+  const cookieOptions = {
+    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+  };
+
+  res.status(statusCode).cookie('token', token, cookieOptions).json({
+    _id: user._id || 'usr-' + Date.now(),
+    name: user.name || (user.email ? user.email.split('@')[0] : 'User'),
+    email: user.email,
+    role: user.role || 'user',
+    token,
+    message,
+  });
 };
 
 // @desc    Send OTP to user email
@@ -95,8 +138,8 @@ export const verifyOtp = async (req, res, next) => {
         console.warn('MongoDB query warning during verify-otp, checking local storage...');
       }
     }
-    if (!user && localUsersMap.has(cleanEmail)) {
-      user = localUsersMap.get(cleanEmail);
+    if (!user) {
+      user = findUserLocally(cleanEmail);
     }
 
     // If password provided, hash it to create/update account
@@ -113,7 +156,7 @@ export const verifyOtp = async (req, res, next) => {
           await user.save();
         } else {
           user.password = hashedPassword;
-          localUsersMap.set(cleanEmail, user);
+          saveUserLocally(user);
         }
       }
     } else {
@@ -143,18 +186,11 @@ export const verifyOtp = async (req, res, next) => {
           password: localHash,
           role: 'user',
         };
-        localUsersMap.set(cleanEmail, user);
+        saveUserLocally(user);
       }
     }
 
-    res.status(200).json({
-      _id: user._id || 'usr-' + Date.now(),
-      name: user.name || cleanEmail.split('@')[0],
-      email: user.email || cleanEmail,
-      role: user.role || 'user',
-      token: generateToken(user._id || cleanEmail),
-      message: 'Authentication successful!',
-    });
+    return sendTokenResponse(res, user, 200, 'Authentication successful!');
   } catch (error) {
     next(error);
   }
@@ -177,10 +213,10 @@ export const registerUser = async (req, res, next) => {
     if (isMongoConnected) {
       try {
         userExists = await User.findOne({ email: cleanEmail });
-      } catch (err) {}
+      } catch (err) { }
     }
-    if (!userExists && localUsersMap.has(cleanEmail)) {
-      userExists = localUsersMap.get(cleanEmail);
+    if (!userExists) {
+      userExists = findUserLocally(cleanEmail);
     }
 
     if (userExists) {
@@ -210,17 +246,10 @@ export const registerUser = async (req, res, next) => {
         password: hashedPassword,
         role: 'user',
       };
-      localUsersMap.set(cleanEmail, user);
+      saveUserLocally(user);
     }
 
-    res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      token: generateToken(user._id),
-      message: 'Account created successfully!',
-    });
+    return sendTokenResponse(res, user, 201, 'Account created successfully!');
   } catch (error) {
     next(error);
   }
@@ -246,25 +275,18 @@ export const authUser = async (req, res, next) => {
         if (user) {
           isMatch = await user.matchPassword(password);
         }
-      } catch (err) {}
+      } catch (err) { }
     }
 
-    if (!user && localUsersMap.has(cleanEmail)) {
-      user = localUsersMap.get(cleanEmail);
+    if (!user) {
+      user = findUserLocally(cleanEmail);
       if (user) {
         isMatch = await matchPasswordLocal(password, user.password);
       }
     }
 
     if (user && isMatch) {
-      res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        token: generateToken(user._id),
-        message: 'Logged in successfully!',
-      });
+      return sendTokenResponse(res, user, 200, 'Logged in successfully!');
     } else {
       res.status(401).json({ message: 'Invalid email or password. Please check your credentials.' });
     }
@@ -279,13 +301,19 @@ export const authUser = async (req, res, next) => {
 export const getUserProfile = async (req, res, next) => {
   try {
     let user = null;
-    if (isMongoConnected) {
+    const lookupId = req.user.id || req.user._id || req.user.email;
+    if (isMongoConnected && lookupId) {
       try {
-        user = await User.findById(req.user.id);
-      } catch (err) {}
+        if (lookupId.toString().startsWith('usr-') || lookupId.toString().includes('@')) {
+          user = await User.findOne({ $or: [{ email: lookupId.toString().toLowerCase() }, { _id: lookupId }, { googleId: lookupId.toString() }] });
+        } else {
+          user = await User.findById(lookupId);
+          if (!user) user = await User.findOne({ email: lookupId.toString().toLowerCase() });
+        }
+      } catch (err) { }
     }
-    if (!user && localUsersMap.has(req.user.id)) {
-      user = localUsersMap.get(req.user.id);
+    if (!user) {
+      user = findUserLocally(lookupId);
     }
 
     if (user) {
@@ -293,7 +321,8 @@ export const getUserProfile = async (req, res, next) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        role: user.role,
+        role: user.role || 'user',
+        avatar: user.avatar,
       });
     } else {
       res.status(404).json({ message: 'User not found' });
@@ -305,7 +334,7 @@ export const getUserProfile = async (req, res, next) => {
 
 // @desc    Change user password securely using bcrypt
 // @route   PUT /api/auth/change-password
-// @access  Private
+// @access  Public
 export const changePassword = async (req, res, next) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -314,13 +343,18 @@ export const changePassword = async (req, res, next) => {
     }
 
     let user = null;
-    if (isMongoConnected) {
+    const lookupId = req.user.id || req.user._id || req.user.email;
+    if (isMongoConnected && lookupId) {
       try {
-        user = await User.findById(req.user.id);
-      } catch (err) {}
+        if (lookupId.toString().startsWith('usr-') || lookupId.toString().includes('@')) {
+          user = await User.findOne({ $or: [{ email: lookupId.toString().toLowerCase() }, { _id: lookupId }] });
+        } else {
+          user = await User.findById(lookupId);
+        }
+      } catch (err) { }
     }
-    if (!user && localUsersMap.has(req.user.id)) {
-      user = localUsersMap.get(req.user.id);
+    if (!user) {
+      user = findUserLocally(lookupId);
     }
 
     if (!user) {
@@ -348,8 +382,7 @@ export const changePassword = async (req, res, next) => {
       await user.save();
     } else {
       user.password = newHashedPassword;
-      localUsersMap.set(user.email, user);
-      localUsersMap.set(user._id, user);
+      saveUserLocally(user);
     }
 
     res.status(200).json({
@@ -360,3 +393,163 @@ export const changePassword = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc    Log user out & clear cookie
+// @route   POST /api/auth/logout
+// @access  Public
+export const logoutUser = (req, res) => {
+  res.cookie('token', 'none', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ message: 'Logged out successfully, cookie cleared' });
+};
+
+// @desc    Initiate Google OAuth 2.0 flow
+// @route   GET /api/auth/google
+// @access  Public
+export const googleLogin = (req, res) => {
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  if (!clientId || clientId === 'your_google_client_id_here') {
+    return res.status(400).send(`
+      <div style="font-family: sans-serif; padding: 40px; background: #181410; color: #FCFAF6; min-height: 100vh;">
+        <h2 style="color: #F59E0B;">⚠️ Google OAuth Client ID Not Configured</h2>
+        <p>Please open <b>backend/.env</b> and replace <code>your_google_client_id_here</code> and <code>your_google_client_secret_here</code> with your actual keys from Google Cloud Console.</p>
+        <a href="http://localhost:5173" style="color: #60A5FA; text-decoration: underline;">← Return to Cozy Cup</a>
+      </div>
+    `);
+  }
+
+  const redirectUri = req.protocol + '://' + req.get('host') + '/api/auth/callback/google';
+  const scope = encodeURIComponent('openid email profile');
+  const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${scope}&access_type=offline&prompt=consent`;
+
+  res.redirect(googleAuthUrl);
+};
+
+// @desc    Handle Google OAuth 2.0 callback
+// @route   GET /api/auth/callback/google
+// @access  Public
+export const googleCallback = async (req, res, next) => {
+  try {
+    const { code } = req.query;
+    if (!code) {
+      return res.redirect((process.env.FRONTEND_URL || 'http://localhost:5173') + '/?error=google_auth_canceled');
+    }
+
+    const clientId = process.env.GOOGLE_CLIENT_ID;
+    const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+    const redirectUri = req.protocol + '://' + req.get('host') + '/api/auth/callback/google';
+
+    // 1. Exchange code for access_token & id_token
+    const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        client_id: clientId,
+        client_secret: clientSecret,
+        code,
+        grant_type: 'authorization_code',
+        redirect_uri: redirectUri,
+      }),
+    });
+
+    const tokenData = await tokenRes.json();
+    if (!tokenRes.ok) {
+      console.error('Google token exchange error:', tokenData);
+      return res.redirect((process.env.FRONTEND_URL || 'http://localhost:5173') + '/?error=google_token_error');
+    }
+
+    // 2. Fetch user info from Google
+    const userRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+      headers: { Authorization: `Bearer ${tokenData.access_token}` },
+    });
+    const googleProfile = await userRes.json();
+
+    if (!googleProfile.email) {
+      return res.redirect((process.env.FRONTEND_URL || 'http://localhost:5173') + '/?error=google_no_email');
+    }
+
+    const cleanEmail = googleProfile.email.toLowerCase().trim();
+
+    // 3. Check if user already exists or create new user
+    let user = null;
+    if (isMongoConnected) {
+      try {
+        user = await User.findOne({ $or: [{ email: cleanEmail }, { googleId: googleProfile.sub }] });
+      } catch (err) { }
+    }
+    if (!user && localUsersMap.has(cleanEmail)) {
+      user = localUsersMap.get(cleanEmail);
+    }
+
+    if (!user) {
+      const userName = googleProfile.name || cleanEmail.split('@')[0];
+      const randomPass = 'GoogleOAuth_' + googleProfile.sub + '_' + Math.random().toString(36).substring(2, 10);
+
+      if (isMongoConnected) {
+        try {
+          user = await User.create({
+            name: userName,
+            email: cleanEmail,
+            password: randomPass,
+            googleId: googleProfile.sub,
+            avatar: googleProfile.picture,
+            role: 'user',
+          });
+        } catch (err) {
+          console.warn('MongoDB create user error during Google OAuth, saving locally...');
+        }
+      }
+
+      if (!user) {
+        const localHash = await hashPasswordLocal(randomPass);
+        user = {
+          _id: 'usr-google-' + Date.now(),
+          name: userName,
+          email: cleanEmail,
+          password: localHash,
+          googleId: googleProfile.sub,
+          avatar: googleProfile.picture,
+          role: 'user',
+        };
+        saveUserLocally(user);
+      }
+    } else {
+      user.googleId = googleProfile.sub;
+      if (googleProfile.picture && !user.avatar) user.avatar = googleProfile.picture;
+      if (isMongoConnected && user.save) {
+        await user.save();
+      } else {
+        saveUserLocally(user);
+      }
+    }
+
+    // 4. Generate token and set cookie
+    const token = generateToken(user._id || user.email);
+    const cookieOptions = {
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    };
+    res.cookie('token', token, cookieOptions);
+
+    // 5. Redirect back to frontend with token and user info
+    const userPayload = {
+      _id: user._id || 'usr-' + Date.now(),
+      name: user.name || cleanEmail.split('@')[0],
+      email: user.email,
+      role: user.role || 'user',
+      avatar: user.avatar || googleProfile.picture,
+      token,
+    };
+
+    const frontendRedirect = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/?oauth_token=${encodeURIComponent(token)}&user=${encodeURIComponent(JSON.stringify(userPayload))}`;
+    res.redirect(frontendRedirect);
+  } catch (error) {
+    console.error('Google OAuth callback error:', error);
+    res.redirect((process.env.FRONTEND_URL || 'http://localhost:5173') + '/?error=google_callback_failed');
+  }
+};
+

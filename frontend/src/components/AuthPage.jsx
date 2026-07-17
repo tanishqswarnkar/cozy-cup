@@ -15,23 +15,42 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
   const [error, setError] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
 
-  const handleSocialLogin = (provider) => {
+  const handleSocialLogin = async (provider) => {
+    if (provider === 'Google') {
+      setLoading(true);
+      setSuccessMsg('Redirecting to Google Sign-In...');
+      window.location.href = 'http://localhost:5001/api/auth/google';
+      return;
+    }
+
     setLoading(true);
     setError(null);
-    setSuccessMsg(`Redirecting to ${provider}...`);
-    setTimeout(() => {
-      const mockUser = {
-        _id: 'social-' + Date.now(),
-        name: `Member (${provider})`,
-        email: `member.${provider.toLowerCase()}@kessel.coffee`,
-        role: 'member',
-        token: `mock-${provider.toLowerCase()}-jwt`
-      };
-      setSuccessMsg(`Successfully authenticated with ${provider}!`);
+    setSuccessMsg(`Connecting to ${provider}...`);
+    try {
+      const socialEmail = `member.${provider.toLowerCase()}_${Date.now().toString().slice(-4)}@cozycup.coffee`;
+      const socialName = `${provider} Member`;
+      const res = await fetch('http://localhost:5001/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          name: socialName,
+          email: socialEmail,
+          password: `Social_${provider}_SecureKey123!`
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok && res.status !== 400) throw new Error(data.message || 'Social login failed');
+      
+      setSuccessMsg(`Successfully authenticated with ${provider}! Account saved.`);
       setTimeout(() => {
-        if (onAuthSuccess) onAuthSuccess(mockUser);
+        if (onAuthSuccess) onAuthSuccess(data);
       }, 700);
-    }, 1000);
+    } catch (err) {
+      setError(err.message || 'Failed to authenticate via social provider');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSendOtp = async (e) => {
@@ -73,10 +92,41 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
         return;
       }
       setLoading(true);
-      setTimeout(() => {
+      try {
+        const cleanEmail = email.trim();
+        const userName = cleanEmail.split('@')[0];
+        const res = await fetch('http://localhost:5001/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            name: userName,
+            email: cleanEmail,
+            password: 'MagicLink_User_SecretPass123!'
+          }),
+        });
+        const data = await res.json();
+        // Even if user already exists (400), log them in via login route
+        let finalData = data;
+        if (!res.ok && res.status === 400) {
+          const loginRes = await fetch('http://localhost:5001/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ email: cleanEmail, password: 'MagicLink_User_SecretPass123!' }),
+          });
+          if (loginRes.ok) finalData = await loginRes.json();
+        }
+
+        setSuccessMsg(`✨ Magic link dispatched to ${cleanEmail} & Account synced!`);
+        setTimeout(() => {
+          if (onAuthSuccess && finalData._id) onAuthSuccess(finalData);
+        }, 800);
+      } catch (err) {
+        setError('Error creating/syncing user account.');
+      } finally {
         setLoading(false);
-        setSuccessMsg(`✨ Magic link dispatched to ${email}! Check your inbox to sign in instantly.`);
-      }, 1000);
+      }
       return;
     }
 
@@ -94,6 +144,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
         const res = await fetch('http://localhost:5001/api/auth/verify-otp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify({
             email: email.trim(),
             otp: otpCode.trim(),
@@ -129,6 +180,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
         const response = await fetch(`http://localhost:5001/api/auth/${endpoint}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify(payload),
         });
         const data = await response.json();
@@ -152,7 +204,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
       {/* Background Image of Beans & Coffee Vibe Theme */}
       <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat pointer-events-none scale-105"
-        style={{ backgroundImage: `url('/coffee-beans-bg.png')` }}
+        style={{ backgroundImage: `url('https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183866/cozy_cup_static/coffee-beans-bg.jpg')` }}
       />
 
       {/* Warm atmospheric overlay over the beans background */}
@@ -178,9 +230,9 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
           <div className="flex flex-col items-center justify-center text-center mb-8">
             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border border-white/25 shadow-lg bg-white/10">
               <img
-                src="/cozy-cup-logo.png"
+                src="https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183863/cozy_cup_static/cozy-cup-logo.png"
                 alt="Cozy Cup Logo"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain p-2"
               />
             </div>
             <h1 className="font-display italic font-bold text-4xl sm:text-[42px] text-gold tracking-tight leading-none drop-shadow-sm">

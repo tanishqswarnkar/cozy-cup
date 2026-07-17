@@ -11,7 +11,7 @@ const readyToEatItems = [
     process: 'Gourmet',
     price: '₹499 / box',
     category: ['Ready to Eat'],
-    image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183543/cozy_cup_products/s-22.jpg',
   },
   {
     origin: 'Warm Cinnamon Pecan Roll',
@@ -20,7 +20,7 @@ const readyToEatItems = [
     process: 'Bakery',
     price: '₹240 / item',
     category: ['Ready to Eat'],
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183538/cozy_cup_products/s-14.jpg',
   },
   {
     origin: 'Almond Biscotti Duo',
@@ -29,19 +29,19 @@ const readyToEatItems = [
     process: 'Crisp',
     price: '₹180 / pack',
     category: ['Ready to Eat'],
-    image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183542/cozy_cup_products/s-21.jpg',
   },
 ]
 
 export default function ReadyToEatPage({ onAddToCart }) {
   return (
-    <div className="min-h-screen bg-[#FCFAF6] pb-24 pt-8 sm:pt-12 px-4 sm:px-10 md:px-16 animate-fadeIn">
+    <div className="min-h-screen bg-[#FCFAF6] dark:bg-[#181410] pb-24 pt-8 sm:pt-12 px-4 sm:px-10 md:px-16 animate-fadeIn transition-colors">
       <div className="max-w-7xl mx-auto">
         {/* Navigation Back */}
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#201B15]/10 hover:bg-[#201B15] text-[#201B15] hover:text-white transition-all text-xs sm:text-sm font-semibold shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#201B15]/10 dark:bg-white/10 hover:bg-[#201B15] dark:hover:bg-amber-400 text-[#201B15] dark:text-[#FCFAF6] hover:text-white dark:hover:text-[#201B15] transition-all text-xs sm:text-sm font-semibold shadow-sm"
           >
             <span>←</span>
             <span>Back to Home</span>
@@ -53,21 +53,21 @@ export default function ReadyToEatPage({ onAddToCart }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="border-b border-[#201B15]/15 pb-6 sm:pb-8 mb-8 sm:mb-12"
+          className="border-b border-[#201B15]/15 dark:border-white/15 pb-6 sm:pb-8 mb-8 sm:mb-12 transition-colors"
         >
-          <span className="font-mono text-xs uppercase tracking-widest text-amber-700 font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-widest text-amber-700 dark:text-amber-400 font-bold block mb-2 transition-colors">
             Grab & Go Treats
           </span>
-          <h1 className="font-display font-bold text-3xl sm:text-5xl text-[#201B15]">
+          <h1 className="font-display font-bold text-3xl sm:text-5xl text-[#201B15] dark:text-[#FCFAF6] transition-colors">
             Ready to Eat
           </h1>
-          <p className="text-sm sm:text-base text-[#201B15]/75 mt-2 max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-[#201B15]/75 dark:text-white/75 mt-2 max-w-2xl leading-relaxed transition-colors">
             Quick confectioneries, artisan truffles, and oven-fresh bakery items ideal for busy mornings or afternoon breaks.
           </p>
         </motion.div>
 
         {/* Curated Ready to Eat Grid */}
-        <h2 className="font-display font-bold text-2xl text-[#201B15] mb-6">
+        <h2 className="font-display font-bold text-2xl text-[#201B15] dark:text-[#FCFAF6] mb-6 transition-colors">
           Grab & Go Selection
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import { useTheme } from './context/ThemeContext.jsx'
 import Nav from './components/Nav.jsx'
 import AuthPage from './components/AuthPage.jsx'
 import CartDrawer from './components/CartDrawer.jsx'
@@ -17,6 +18,7 @@ import GalleryPage from './pages/GalleryPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 
 export default function App() {
+  const { isDark, toggleTheme } = useTheme()
   const [isLoading, setIsLoading] = useState(true)
   const [showAuth, setShowAuth] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -44,33 +46,59 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
-  // Verify JWT Token against backend (/api/auth/me) when app starts up
+  // Verify JWT Token, OAuth Callback, or HTTP-only Cookie session when app starts up
   useEffect(() => {
-    const token = localStorage.getItem('cozy_jwt_token')
-    if (!token) return
+    // 1. Check if returning from Google OAuth redirect (`?oauth_token=...&user=...`)
+    const urlParams = new URLSearchParams(window.location.search);
+    const oauthToken = urlParams.get('oauth_token');
+    const oauthUserStr = urlParams.get('user');
+
+    if (oauthToken && oauthUserStr) {
+      try {
+        const parsedUser = JSON.parse(decodeURIComponent(oauthUserStr));
+        setUser(parsedUser);
+        localStorage.setItem('cozy_jwt_token', oauthToken);
+        localStorage.setItem('cozy_user', JSON.stringify(parsedUser));
+        // Clean URL bar cleanly without refreshing
+        window.history.replaceState({}, document.title, window.location.pathname);
+        return;
+      } catch (err) {
+        console.error('Failed to parse OAuth callback data:', err);
+      }
+    }
+
+    // 2. Otherwise verify existing JWT Token or Cookie
+    const token = localStorage.getItem('cozy_jwt_token');
 
     fetch('http://localhost:5001/api/auth/me', {
       method: 'GET',
+      credentials: 'include',
       headers: {
-        'Authorization': `Bearer ${token}`,
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
         'Content-Type': 'application/json'
       }
     })
       .then((res) => {
-        if (!res.ok) throw new Error('JWT token expired or invalid')
+        if (!res.ok) throw new Error('Session expired or invalid')
         return res.json()
       })
       .then((data) => {
-        // Token is valid! Update user state with verified profile
-        const verifiedUser = { ...data, token }
+        // Token/Cookie is valid! Update user state with verified profile
+        const verifiedUser = { ...data, token: token || data.token }
         setUser(verifiedUser)
+        if (verifiedUser.token) {
+          localStorage.setItem('cozy_jwt_token', verifiedUser.token)
+        }
         localStorage.setItem('cozy_user', JSON.stringify(verifiedUser))
       })
       .catch((err) => {
-        console.warn('JWT verification failed, logging out:', err.message)
-        localStorage.removeItem('cozy_jwt_token')
-        localStorage.removeItem('cozy_user')
-        setUser(null)
+        // If local storage had token but failed, clear it
+        if (token) {
+          console.warn('Authentication check failed, clearing local session:', err.message)
+          localStorage.removeItem('cozy_jwt_token')
+          localStorage.removeItem('cozy_user')
+          setUser(null)
+        }
       })
   }, [])
 
@@ -114,7 +142,8 @@ export default function App() {
   const totalCartCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0)
 
   return (
-    <div className="font-sans relative min-h-screen bg-[#FCFAF6] overflow-x-hidden">
+    <div className="font-sans relative min-h-screen bg-[#FCFAF6] dark:bg-[#181410] text-[#201B15] dark:text-[#FCFAF6] overflow-x-hidden transition-colors duration-300">
+
       {/* Coffee Beans Themed Preloader */}
       <AnimatePresence>
         {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
@@ -125,6 +154,7 @@ export default function App() {
         onOpenAuth={() => setShowAuth(true)}
         user={user}
         onLogout={() => {
+          fetch('http://localhost:5001/api/auth/logout', { method: 'POST', credentials: 'include' }).catch(() => {})
           localStorage.removeItem('cozy_jwt_token')
           localStorage.removeItem('cozy_user')
           setUser(null)

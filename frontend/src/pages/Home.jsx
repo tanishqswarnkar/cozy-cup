@@ -11,20 +11,17 @@ export default function Home({ user, onOpenAuth, onAddToCart }) {
   return (
     <div className="w-full">
       <Element name="hero">
-        <Hero user={user} onOpenAuth={onOpenAuth} />
+        <Hero
+          user={user}
+          onOpenAuth={onOpenAuth}
+          selectedCategory={selectedCategory}
+          onSelectCategory={(category) => setSelectedCategory(category)}
+        />
       </Element>
       
-      {/* Handcrafted Curations Quick Access Bar & Curated Combos Section */}
+      {/* Curated Combos Section right below the full-page video hero */}
       <Element name="quick-access">
         <Element name="shop-grid">
-          <QuickAccess
-            user={user}
-            onOpenAuth={onOpenAuth}
-            selectedCategory={selectedCategory}
-            onSelectCategory={(category) => {
-              setSelectedCategory(category)
-            }}
-          />
           <CombosSection
             user={user}
             onOpenAuth={onOpenAuth}

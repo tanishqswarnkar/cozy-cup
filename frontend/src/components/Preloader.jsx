@@ -20,10 +20,10 @@ export default function Preloader({ onComplete }) {
     >
       {/* 100% Pure Edge-to-Edge Coffee Beans Photo Theme (Getty/Unsplash High-Res Dense Roasted Beans) */}
       <img
-        src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=1600&auto=format&fit=crop"
+        src="https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183674/cozy_cup_products/gallery-1.jpg"
         alt="Dense Roasted Coffee Beans Theme"
         onError={(e) => {
-          e.currentTarget.src = '/coffee-beans-bg.png'
+          e.currentTarget.src = 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183866/cozy_cup_static/coffee-beans-bg.jpg'
         }}
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       />
@@ -41,9 +41,9 @@ export default function Preloader({ onComplete }) {
         {/* Brand Logo before text */}
         <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-white/35 shadow-[0_12px_35px_rgba(0,0,0,0.9)] p-1.5 bg-white/10 backdrop-blur-md mb-4 sm:mb-6 flex items-center justify-center animate-pulse">
           <img
-            src="/cozy-cup-logo.png"
+            src="https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183863/cozy_cup_static/cozy-cup-logo.png"
             alt="Cozy Cup Logo"
-            className="w-full h-full object-cover scale-105 rounded-full"
+            className="w-full h-full object-contain scale-105 rounded-full"
           />
         </div>
 

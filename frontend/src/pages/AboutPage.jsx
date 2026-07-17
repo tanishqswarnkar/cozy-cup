@@ -19,13 +19,13 @@ export default function AboutPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#FCFAF6] flex flex-col justify-between pt-8 sm:pt-12 px-4 sm:px-10 md:px-16 animate-fadeIn">
+    <div className="min-h-screen bg-[#FCFAF6] dark:bg-[#181410] flex flex-col justify-between pt-8 sm:pt-12 px-4 sm:px-10 md:px-16 animate-fadeIn transition-colors">
       <div className="max-w-7xl mx-auto w-full pb-24">
         {/* Navigation Back */}
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono tracking-wider uppercase text-[#201B15]/70 hover:text-[#201B15] transition-colors"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono tracking-wider uppercase text-[#201B15]/70 dark:text-white/70 hover:text-[#201B15] dark:hover:text-white transition-colors"
           >
             <span>←</span>
             <span>Back to Home</span>
@@ -37,15 +37,15 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="border-b border-[#201B15]/15 pb-12 mb-16 text-center max-w-3xl mx-auto"
+          className="border-b border-[#201B15]/15 dark:border-white/15 pb-12 mb-16 text-center max-w-3xl mx-auto transition-colors"
         >
-          <span className="font-mono text-xs uppercase tracking-widest text-amber-800 font-bold block mb-3">
+          <span className="font-mono text-xs uppercase tracking-widest text-amber-800 dark:text-amber-400 font-bold block mb-3 transition-colors">
             Our Heritage & Purpose
           </span>
-          <h1 className="font-display font-bold text-4xl sm:text-6xl text-[#201B15] leading-tight">
+          <h1 className="font-display font-bold text-4xl sm:text-6xl text-[#201B15] dark:text-[#FCFAF6] leading-tight transition-colors">
             More Than Just Coffee. A Community Sanctuary.
           </h1>
-          <p className="text-sm sm:text-base text-[#201B15]/75 mt-4 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#201B15]/75 dark:text-white/75 mt-4 leading-relaxed transition-colors">
             From high-altitude volcanic soils in Ethiopia and Colombia to the warmth of your morning cup, explore our relentless pursuit of extraordinary coffee craftsmanship and sustainability.
           </p>
         </motion.div>
@@ -53,14 +53,14 @@ export default function AboutPage() {
         {/* Two-Column Feature Area */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-16 items-center mb-24">
           <div className="lg:col-span-6 relative">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3]">
+            <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-[#201B15] aspect-[4/3]">
               <img
-                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop"
+                src="https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183546/cozy_cup_products/s-27.jpg"
                 alt="Roasting Craft"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
-            <div className="absolute -bottom-6 -left-4 sm:-left-6 bg-[#201B15] text-[#FCFAF6] p-6 rounded-3xl shadow-xl border border-amber-500/30 max-w-[240px]">
+            <div className="absolute -bottom-6 -left-4 sm:-left-6 bg-[#201B15] dark:bg-[#1E1914] text-[#FCFAF6] p-6 rounded-3xl shadow-xl border border-amber-500/30 dark:border-amber-400/50 max-w-[240px]">
               <span className="font-display font-bold text-3xl sm:text-4xl text-amber-300 block">
                 1,950m+
               </span>
@@ -71,13 +71,13 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-6 space-y-6">
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#201B15]">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#201B15] dark:text-[#FCFAF6] transition-colors">
               The Pursuit of the Perfect Extraction
             </h2>
-            <p className="text-sm sm:text-base text-[#201B15]/80 leading-relaxed">
+            <p className="text-sm sm:text-base text-[#201B15]/80 dark:text-white/80 leading-relaxed transition-colors">
               We believe that great coffee is not an accident—it is the synthesis of agricultural mastery, rigorous scientific roasting, and human warmth. Every harvest is cupped over 50 times by our Q-Graders before a profile is locked in.
             </p>
-            <p className="text-sm sm:text-base text-[#201B15]/80 leading-relaxed">
+            <p className="text-sm sm:text-base text-[#201B15]/80 dark:text-white/80 leading-relaxed transition-colors">
               Whether you are savoring our double-shot espresso cloud or our 18-hour nitro cold brew, you are tasting the direct result of fair compensation, soil health conservation, and artisan passion.
             </p>
           </div>
@@ -86,10 +86,10 @@ export default function AboutPage() {
         {/* Core Pillars / Values Grid */}
         <div className="mb-24">
           <div className="text-center max-w-xl mx-auto mb-12">
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#201B15]">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#201B15] dark:text-[#FCFAF6] transition-colors">
               Our Core Pillars
             </h2>
-            <p className="text-xs sm:text-sm text-[#201B15]/65 mt-2">
+            <p className="text-xs sm:text-sm text-[#201B15]/65 dark:text-white/65 mt-2 transition-colors">
               The four uncompromised principles that govern every bean we roast and every guest we serve.
             </p>
           </div>
@@ -102,16 +102,16 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white p-7 rounded-3xl border border-[#201B15]/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+                className="bg-white dark:bg-[#1E1914] p-7 rounded-3xl border border-[#201B15]/10 dark:border-white/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-[#F8F5F0] flex items-center justify-center text-2xl mb-4 border border-[#201B15]/10">
+                  <div className="w-12 h-12 rounded-2xl bg-[#F8F5F0] dark:bg-[#15120E] flex items-center justify-center text-2xl mb-4 border border-[#201B15]/10 dark:border-white/10">
                     {val.icon}
                   </div>
-                  <h3 className="font-display font-bold text-lg text-[#201B15] mb-2">
+                  <h3 className="font-display font-bold text-lg text-[#201B15] dark:text-[#FCFAF6] mb-2 transition-colors">
                     {val.title}
                   </h3>
-                  <p className="text-xs text-[#201B15]/70 leading-relaxed">
+                  <p className="text-xs text-[#201B15]/70 dark:text-white/70 leading-relaxed transition-colors">
                     {val.desc}
                   </p>
                 </div>

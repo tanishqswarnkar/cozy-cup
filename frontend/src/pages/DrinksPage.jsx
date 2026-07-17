@@ -11,7 +11,7 @@ const drinksItems = [
     process: 'Steamed',
     price: '₹280 / cup',
     category: ['Drinks'],
-    image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183529/cozy_cup_products/s-2.jpg',
   },
   {
     origin: 'Cold Brew Nitro Float',
@@ -20,7 +20,7 @@ const drinksItems = [
     process: 'Nitro',
     price: '₹310 / cup',
     category: ['Drinks'],
-    image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183532/cozy_cup_products/s-6.jpg',
   },
   {
     origin: 'Matcha Espresso Fusion',
@@ -29,7 +29,7 @@ const drinksItems = [
     process: 'Layered',
     price: '₹340 / cup',
     category: ['Drinks'],
-    image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183535/cozy_cup_products/s-10.jpg',
   },
   {
     origin: 'Yirgacheffe, Ethiopia',
@@ -38,19 +38,19 @@ const drinksItems = [
     process: 'Washed',
     price: '₹650 / 340g',
     category: ['Drinks'],
-    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183544/cozy_cup_products/s-23.jpg',
   },
 ]
 
 export default function DrinksPage({ onAddToCart }) {
   return (
-    <div className="min-h-screen bg-[#FCFAF6] pb-24 pt-8 sm:pt-12 px-4 sm:px-10 md:px-16 animate-fadeIn">
+    <div className="min-h-screen bg-[#FCFAF6] dark:bg-[#181410] pb-24 pt-8 sm:pt-12 px-4 sm:px-10 md:px-16 animate-fadeIn transition-colors">
       <div className="max-w-7xl mx-auto">
         {/* Navigation Back */}
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#201B15]/10 hover:bg-[#201B15] text-[#201B15] hover:text-white transition-all text-xs sm:text-sm font-semibold shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#201B15]/10 dark:bg-white/10 hover:bg-[#201B15] dark:hover:bg-amber-400 text-[#201B15] dark:text-[#FCFAF6] hover:text-white dark:hover:text-[#201B15] transition-all text-xs sm:text-sm font-semibold shadow-sm"
           >
             <span>←</span>
             <span>Back to Home</span>
@@ -62,21 +62,21 @@ export default function DrinksPage({ onAddToCart }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="border-b border-[#201B15]/15 pb-6 sm:pb-8 mb-8 sm:mb-12"
+          className="border-b border-[#201B15]/15 dark:border-white/15 pb-6 sm:pb-8 mb-8 sm:mb-12 transition-colors"
         >
-          <span className="font-mono text-xs uppercase tracking-widest text-amber-700 font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-widest text-amber-700 dark:text-amber-400 font-bold block mb-2 transition-colors">
             Handcrafted Beverages
           </span>
-          <h1 className="font-display font-bold text-3xl sm:text-5xl text-[#201B15]">
+          <h1 className="font-display font-bold text-3xl sm:text-5xl text-[#201B15] dark:text-[#FCFAF6] transition-colors">
             Drinks Menu
           </h1>
-          <p className="text-sm sm:text-base text-[#201B15]/75 mt-2 max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-[#201B15]/75 dark:text-white/75 mt-2 max-w-2xl leading-relaxed transition-colors">
             From single-origin pour overs and nitro cold brews to signature espresso clouds.
           </p>
         </motion.div>
 
         {/* Curated Drinks Grid */}
-        <h2 className="font-display font-bold text-2xl text-[#201B15] mb-6">
+        <h2 className="font-display font-bold text-2xl text-[#201B15] dark:text-[#FCFAF6] mb-6 transition-colors">
           All Drinks
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">

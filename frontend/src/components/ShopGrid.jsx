@@ -12,7 +12,7 @@ const allItems = [
     process: 'Washed',
     price: '₹650 / 340g',
     category: ['Bestseller', 'Drinks'],
-    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183544/cozy_cup_products/s-23.jpg',
   },
   {
     origin: 'Iced Mocha Frappe',
@@ -21,7 +21,7 @@ const allItems = [
     process: 'Handcrafted',
     price: '₹320 / cup',
     category: ['Bestseller', 'Drinks'],
-    image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183535/cozy_cup_products/s-9.jpg',
   },
   {
     origin: 'Avocado & Pesto Panini',
@@ -30,7 +30,7 @@ const allItems = [
     process: 'Toasted',
     price: '₹380 / slice',
     category: ['Bestseller', 'Food'],
-    image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183540/cozy_cup_products/s-16.jpg',
   },
   {
     origin: 'Huila, Colombia',
@@ -39,7 +39,7 @@ const allItems = [
     process: 'Honey',
     price: '₹590 / 340g',
     category: ['Bestseller', 'Drinks'],
-    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183528/cozy_cup_products/s-1.jpg',
   },
   {
     origin: 'Artisanal Truffle Box',
@@ -48,7 +48,7 @@ const allItems = [
     process: 'Gourmet',
     price: '₹499 / box',
     category: ['Bestseller', 'Ready to Eat'],
-    image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183543/cozy_cup_products/s-22.jpg',
   },
 
   // Drinks
@@ -59,7 +59,7 @@ const allItems = [
     process: 'Steamed',
     price: '₹280 / cup',
     category: ['Drinks'],
-    image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183529/cozy_cup_products/s-2.jpg',
   },
   {
     origin: 'Cold Brew Nitro Float',
@@ -68,7 +68,7 @@ const allItems = [
     process: 'Nitro',
     price: '₹310 / cup',
     category: ['Drinks'],
-    image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183533/cozy_cup_products/s-7.jpg',
   },
 
   // Food
@@ -79,7 +79,7 @@ const allItems = [
     process: 'Bakery',
     price: '₹350 / item',
     category: ['Food'],
-    image: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183541/cozy_cup_products/s-17.jpg',
   },
   {
     origin: 'Spinach & Feta Breakfast Wrap',
@@ -88,7 +88,7 @@ const allItems = [
     process: 'Toasted',
     price: '₹290 / item',
     category: ['Food'],
-    image: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183541/cozy_cup_products/s-19.jpg',
   },
 
   // Merchandise
@@ -99,7 +99,7 @@ const allItems = [
     process: 'Glasswork',
     price: '₹1,899 / set',
     category: ['Merchandise'],
-    image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183547/cozy_cup_products/s-29.jpg',
   },
   {
     origin: 'Mandheling, Sumatra',
@@ -108,7 +108,7 @@ const allItems = [
     process: 'Natural',
     price: '₹620 / 340g',
     category: ['Coffee At Home'],
-    image: 'https://images.unsplash.com/photo-1610632380989-680fe40816c6?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183544/cozy_cup_products/s-25.jpg',
   },
   {
     origin: 'Antigua, Guatemala',
@@ -117,7 +117,7 @@ const allItems = [
     process: 'Washed',
     price: '₹680 / 340g',
     category: ['Coffee At Home'],
-    image: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183545/cozy_cup_products/s-26.jpg',
   },
   {
     origin: 'Nyeri AA, Kenya',
@@ -126,7 +126,7 @@ const allItems = [
     process: 'Washed',
     price: '₹750 / 340g',
     category: ['Drinks'],
-    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183546/cozy_cup_products/s-27.jpg',
   },
   {
     origin: 'Tarrazú, Costa Rica',
@@ -135,7 +135,7 @@ const allItems = [
     process: 'Honey',
     price: '₹720 / 340g',
     category: ['Drinks'],
-    image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183547/cozy_cup_products/s-28.jpg',
   },
 
   // Ready to Eat
@@ -146,7 +146,7 @@ const allItems = [
     process: 'Bakery',
     price: '₹240 / item',
     category: ['Ready to Eat'],
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183538/cozy_cup_products/s-14.jpg',
   },
   {
     origin: 'Almond Biscotti Duo',
@@ -155,7 +155,7 @@ const allItems = [
     process: 'Crisp',
     price: '₹180 / pack',
     category: ['Ready to Eat'],
-    image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183542/cozy_cup_products/s-21.jpg',
   },
 ]
 
@@ -168,26 +168,26 @@ export default function ShopGrid({ onAddToCart, selectedCategory = 'Bestseller' 
   })
 
   return (
-    <section id="shop-grid" className="px-4 sm:px-10 md:px-16 pb-20 sm:pb-24 bg-[#FCFAF6] pt-4 sm:pt-6 transition-all">
+    <section id="shop-grid" className="px-4 sm:px-10 md:px-16 pb-20 sm:pb-24 bg-[#FCFAF6] dark:bg-[#181410] pt-4 sm:pt-6 transition-colors">
       <motion.div 
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true, amount: 0.2 }}
-        className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline mb-8 sm:mb-10 border-b border-[#201B15]/10 pb-4 sm:pb-5 gap-2"
+        className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline mb-8 sm:mb-10 border-b border-[#201B15]/10 dark:border-white/10 pb-4 sm:pb-5 gap-2 transition-colors"
       >
         <div>
-          <h2 className="font-display italic font-bold text-2xl sm:text-3xl md:text-4xl text-[#201B15]">
+          <h2 className="font-display italic font-bold text-2xl sm:text-3xl md:text-4xl text-[#201B15] dark:text-[#FCFAF6] transition-colors">
             {selectedCategory === 'Bestseller' ? "This Week's Bestsellers" : selectedCategory}
           </h2>
-          <p className="text-xs sm:text-sm text-[#201B15]/65 mt-1 font-normal leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#201B15]/65 dark:text-white/65 mt-1 font-normal leading-relaxed transition-colors">
             {selectedCategory === 'Bestseller' 
               ? 'Our top specialty curations, roasts & treats loved by Cozy Cup members.'
               : `Handcrafted ${selectedCategory.toLowerCase()} selections freshly prepared for you.`}
           </p>
         </div>
         <div className="flex items-center gap-3 shrink-0">
-          <span className="text-[11px] sm:text-[12px] font-mono tracking-widest text-[#201B15]/60 uppercase shrink-0">
+          <span className="text-[11px] sm:text-[12px] font-mono tracking-widest text-[#201B15]/60 dark:text-white/60 uppercase shrink-0 transition-colors">
             {filteredItems.length} {filteredItems.length === 1 ? 'Item' : 'Items'} Available
           </span>
         </div>

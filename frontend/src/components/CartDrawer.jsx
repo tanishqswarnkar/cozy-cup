@@ -25,20 +25,20 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
       />
 
       {/* Side Drawer Panel */}
-      <div className="relative z-10 w-full max-w-[100vw] sm:max-w-md bg-[#FCFAF6] text-[#201B15] h-full shadow-2xl flex flex-col justify-between overflow-hidden border-l border-[#201B15]/10 animate-slideLeft">
+      <div className="relative z-10 w-full max-w-[100vw] sm:max-w-md bg-[#FCFAF6] dark:bg-[#181410] text-[#201B15] dark:text-[#FCFAF6] h-full shadow-2xl flex flex-col justify-between overflow-hidden border-l border-[#201B15]/10 dark:border-white/10 animate-slideLeft transition-colors">
         
         {/* Header */}
-        <div className="p-4 sm:p-6 border-b border-[#201B15]/10 flex items-center justify-between bg-white">
+        <div className="p-4 sm:p-6 border-b border-[#201B15]/10 dark:border-white/10 flex items-center justify-between bg-white dark:bg-[#1E1914] transition-colors">
           <div className="flex items-center gap-2.5">
-            <h2 className="font-display italic font-bold text-2xl text-[#201B15]">Your Coffee Cart</h2>
-            <span className="bg-[#201B15] text-white text-xs font-mono font-bold px-2.5 py-0.5 rounded-full">
+            <h2 className="font-display italic font-bold text-2xl text-[#201B15] dark:text-[#FCFAF6]">Your Coffee Cart</h2>
+            <span className="bg-[#201B15] dark:bg-amber-400 text-white dark:text-[#201B15] text-xs font-mono font-bold px-2.5 py-0.5 rounded-full">
               {cart.reduce((totalQty, i) => totalQty + (i.quantity || 1), 0)}
             </span>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-2 text-[#201B15]/60 hover:text-[#201B15] transition-colors rounded-full hover:bg-[#201B15]/5"
+            className="p-2 text-[#201B15]/60 dark:text-white/60 hover:text-[#201B15] dark:hover:text-white transition-colors rounded-full hover:bg-[#201B15]/5 dark:hover:bg-white/10 cursor-pointer"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -47,10 +47,10 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
         </div>
 
         {/* Free Shipping Progress */}
-        <div className="bg-[#EBE5D8]/80 px-6 py-3 border-b border-[#201B15]/10">
-          <div className="flex justify-between text-[12px] font-mono mb-1.5 text-[#201B15]/80">
+        <div className="bg-[#EBE5D8]/80 dark:bg-[#15120E] px-6 py-3 border-b border-[#201B15]/10 dark:border-white/10 transition-colors">
+          <div className="flex justify-between text-[12px] font-mono mb-1.5 text-[#201B15]/80 dark:text-white/80">
             {total >= freeShippingThreshold ? (
-              <span className="font-bold text-emerald-800 flex items-center gap-1.5">
+              <span className="font-bold text-emerald-800 dark:text-emerald-400 flex items-center gap-1.5">
                 <span>🎉 You unlocked FREE Express Shipping in India!</span>
               </span>
             ) : (
@@ -58,9 +58,9 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
             )}
             <span>₹{total.toLocaleString('en-IN')} / ₹{freeShippingThreshold.toLocaleString('en-IN')}</span>
           </div>
-          <div className="w-full h-1.5 bg-black/10 rounded-full overflow-hidden">
+          <div className="w-full h-1.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-[#201B15] transition-all duration-500 ease-out"
+              className="h-full bg-[#201B15] dark:bg-amber-400 transition-all duration-500 ease-out"
               style={{ width: `${progressToFreeShipping}%` }}
             />
           </div>
@@ -69,16 +69,16 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
         {/* Cart Items List */}
         <div className="flex-1 overflow-y-auto p-6 space-y-4">
           {cart.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center p-8 text-[#201B15]/60">
-              <div className="w-20 h-20 bg-[#EBE5D8] rounded-full flex items-center justify-center mb-4 text-3xl">
+            <div className="h-full flex flex-col items-center justify-center text-center p-8 text-[#201B15]/60 dark:text-white/60">
+              <div className="w-20 h-20 bg-[#EBE5D8] dark:bg-[#1E1914] rounded-full flex items-center justify-center mb-4 text-3xl">
                 ☕
               </div>
-              <p className="font-display italic text-2xl text-[#201B15] mb-2">Your cup is empty</p>
+              <p className="font-display italic text-2xl text-[#201B15] dark:text-[#FCFAF6] mb-2">Your cup is empty</p>
               <p className="text-sm mb-6 max-w-[240px]">Explore our freshly roasted Yirgacheffe, Huila, and Microlots below.</p>
               <button
                 type="button"
                 onClick={onClose}
-                className="bg-[#201B15] text-white px-6 py-3 rounded-2xl text-sm font-semibold shadow-md hover:bg-[#322A21] transition-all"
+                className="bg-[#201B15] dark:bg-amber-400 text-white dark:text-[#201B15] px-6 py-3 rounded-2xl text-sm font-semibold shadow-md hover:bg-[#322A21] dark:hover:bg-amber-300 transition-all cursor-pointer"
               >
                 Explore Roasts
               </button>
@@ -87,10 +87,10 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
             cart.map((item, idx) => (
               <div 
                 key={item.origin + idx}
-                className="bg-white rounded-2xl p-4 border border-[#201B15]/10 flex gap-4 items-center shadow-sm hover:shadow-md transition-shadow"
+                className="bg-white dark:bg-[#1E1914] rounded-2xl p-4 border border-[#201B15]/10 dark:border-white/10 flex gap-4 items-center shadow-sm hover:shadow-md transition-all"
               >
                 {/* Coffee Item Image */}
-                <div className="w-20 h-20 rounded-xl overflow-hidden bg-[#EBE5D8] shrink-0 relative">
+                <div className="w-20 h-20 rounded-xl overflow-hidden bg-[#EBE5D8] dark:bg-[#15120E] shrink-0 relative">
                   {item.image ? (
                     <img src={item.image} alt={item.origin} className="w-full h-full object-cover" />
                   ) : (
@@ -100,17 +100,17 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
 
                 {/* Item Details */}
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-display font-bold text-lg text-[#201B15] truncate">{item.origin}</h4>
-                  <p className="text-xs text-[#201B15]/65 truncate mb-2">{item.tasteLine}</p>
+                  <h4 className="font-display font-bold text-lg text-[#201B15] dark:text-[#FCFAF6] truncate">{item.origin}</h4>
+                  <p className="text-xs text-[#201B15]/65 dark:text-white/65 truncate mb-2">{item.tasteLine}</p>
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-sm font-bold text-[#201B15]">{item.price}</span>
+                    <span className="font-mono text-sm font-bold text-[#201B15] dark:text-amber-300">{item.price}</span>
                     
                     {/* Quantity controls */}
-                    <div className="flex items-center gap-2 bg-[#201B15]/5 rounded-xl px-2 py-1">
+                    <div className="flex items-center gap-2 bg-[#201B15]/5 dark:bg-white/10 rounded-xl px-2 py-1">
                       <button
                         type="button"
                         onClick={() => onUpdateQuantity(idx, (item.quantity || 1) - 1)}
-                        className="w-6 h-6 rounded-lg bg-white shadow-sm flex items-center justify-center text-xs font-bold hover:bg-[#201B15] hover:text-white transition-colors"
+                        className="w-6 h-6 rounded-lg bg-white dark:bg-[#181410] shadow-sm flex items-center justify-center text-xs font-bold hover:bg-[#201B15] dark:hover:bg-amber-400 hover:text-white dark:hover:text-[#201B15] transition-colors cursor-pointer"
                       >
                         -
                       </button>
@@ -118,7 +118,7 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
                       <button
                         type="button"
                         onClick={() => onUpdateQuantity(idx, (item.quantity || 1) + 1)}
-                        className="w-6 h-6 rounded-lg bg-white shadow-sm flex items-center justify-center text-xs font-bold hover:bg-[#201B15] hover:text-white transition-colors"
+                        className="w-6 h-6 rounded-lg bg-white dark:bg-[#181410] shadow-sm flex items-center justify-center text-xs font-bold hover:bg-[#201B15] dark:hover:bg-amber-400 hover:text-white dark:hover:text-[#201B15] transition-colors cursor-pointer"
                       >
                         +
                       </button>
@@ -130,7 +130,7 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
                 <button
                   type="button"
                   onClick={() => onRemoveItem(idx)}
-                  className="p-1.5 text-[#201B15]/40 hover:text-red-600 transition-colors"
+                  className="p-1.5 text-[#201B15]/40 dark:text-white/40 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -143,17 +143,17 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
 
         {/* Footer Checkout CTA */}
         {cart.length > 0 && (
-          <div className="p-6 border-t border-[#201B15]/10 bg-white space-y-4 shadow-[0_-10px_30px_rgba(0,0,0,0.03)]">
+          <div className="p-6 border-t border-[#201B15]/10 dark:border-white/10 bg-white dark:bg-[#1E1914] space-y-4 shadow-[0_-10px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_-10px_30px_rgba(0,0,0,0.4)] transition-colors">
             <div className="space-y-1.5 text-sm font-mono">
-              <div className="flex justify-between text-[#201B15]/70">
+              <div className="flex justify-between text-[#201B15]/70 dark:text-white/70">
                 <span>Subtotal ({cart.reduce((totalQty, i) => totalQty + (i.quantity || 1), 0)} items)</span>
                 <span>₹{total.toLocaleString('en-IN')}</span>
               </div>
-              <div className="flex justify-between text-[#201B15]/70">
+              <div className="flex justify-between text-[#201B15]/70 dark:text-white/70">
                 <span>Shipping</span>
                 <span>{total >= freeShippingThreshold ? 'FREE' : '₹99'}</span>
               </div>
-              <div className="flex justify-between font-bold text-base pt-2 border-t border-[#201B15]/10 text-[#201B15]">
+              <div className="flex justify-between font-bold text-base pt-2 border-t border-[#201B15]/10 dark:border-white/10 text-[#201B15] dark:text-[#FCFAF6]">
                 <span>Total Due</span>
                 <span>₹{(total + (total >= freeShippingThreshold ? 0 : 99)).toLocaleString('en-IN')}</span>
               </div>
@@ -165,7 +165,7 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
                 alert(`Proceeding to checkout with ${cart.length} coffee items (Total: ₹${(total + (total >= freeShippingThreshold ? 0 : 99)).toLocaleString('en-IN')})!`)
                 if (onCheckout) onCheckout()
               }}
-              className="w-full bg-[#201B15] hover:bg-[#322A21] active:scale-[0.99] text-white rounded-2xl py-4 font-semibold text-sm shadow-xl transition-all flex items-center justify-center gap-2"
+              className="w-full bg-[#201B15] hover:bg-[#322A21] dark:bg-amber-400 dark:hover:bg-amber-300 active:scale-[0.99] text-white dark:text-[#201B15] rounded-2xl py-4 font-semibold text-sm shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Proceed to Checkout</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

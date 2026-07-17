@@ -5,48 +5,48 @@ import { motion } from 'framer-motion'
 export default function GallerySection() {
   const photos = [
     {
-      url: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=700&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183673/cozy_cup_products/hero-1.jpg',
       title: 'Warm Morning Vibe',
       tag: 'Interior',
     },
     {
-      url: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=700&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183528/cozy_cup_products/s-1.jpg',
       title: 'Artisan Latte Art',
       tag: 'Craftsmanship',
     },
     {
-      url: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=700&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183674/cozy_cup_products/gallery-1.jpg',
       title: 'Single-Origin Beans',
       tag: 'Roastery',
     },
     {
-      url: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=700&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183675/cozy_cup_products/gallery-2.jpg',
       title: 'Cozy Corner Booths',
       tag: 'Atmosphere',
     },
     {
-      url: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=700&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183676/cozy_cup_products/about-1.jpg',
       title: 'Pour Over Extraction',
       tag: 'Brew Bar',
     },
     {
-      url: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=700&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183547/cozy_cup_products/s-28.jpg',
       title: 'Freshly Baked Pastries',
       tag: 'Bakery',
     },
   ]
 
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-10 md:px-16 bg-[#F8F5F0] border-t border-[#201B15]/10">
+    <section className="py-16 sm:py-24 px-4 sm:px-10 md:px-16 bg-[#F8F5F0] dark:bg-[#181410] border-t border-[#201B15]/10 dark:border-white/10 transition-colors">
       <div className="max-w-6xl mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="font-mono text-xs uppercase tracking-widest text-amber-800 font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-widest text-amber-800 dark:text-amber-400 font-bold block mb-2 transition-colors">
             Moments & Atmosphere
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#201B15]">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#201B15] dark:text-[#FCFAF6] transition-colors">
             Cafe Gallery
           </h2>
-          <p className="text-sm sm:text-base text-[#201B15]/70 mt-3 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#201B15]/70 dark:text-white/70 mt-3 leading-relaxed transition-colors">
             Take a visual peek inside our cozy sanctuary where good conversations, rich aromas, and warmth come together.
           </p>
         </div>
@@ -84,7 +84,7 @@ export default function GallerySection() {
         <div className="mt-16 text-center">
           <Link
             to="/gallery"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#201B15] text-amber-300 hover:bg-[#342A21] font-semibold text-xs sm:text-sm transition-all shadow-md hover:shadow-xl active:scale-95"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#201B15] hover:bg-[#342A21] dark:bg-amber-400 dark:hover:bg-amber-300 text-amber-300 dark:text-[#201B15] font-semibold text-xs sm:text-sm transition-all shadow-md hover:shadow-xl active:scale-95"
           >
             <span>Explore Full Visual Gallery Page</span>
             <span>↗</span>

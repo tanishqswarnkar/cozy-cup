@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import OptimizedImage from './OptimizedImage.jsx'
 
 export const masterSearchCatalog = [
   // Drinks & Espresso
@@ -11,7 +12,7 @@ export const masterSearchCatalog = [
     process: 'Espresso',
     price: '₹220',
     category: ['Drinks', 'Espresso'],
-    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183528/cozy_cup_products/s-1.jpg',
   },
   {
     id: 's-2',
@@ -21,7 +22,7 @@ export const masterSearchCatalog = [
     process: 'Signature',
     price: '₹280',
     category: ['Drinks', 'Espresso'],
-    image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183529/cozy_cup_products/s-2.jpg',
   },
   {
     id: 's-3',
@@ -31,7 +32,7 @@ export const masterSearchCatalog = [
     process: 'New',
     price: '₹260',
     category: ['Drinks', 'Espresso'],
-    image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183530/cozy_cup_products/s-3.jpg',
   },
   {
     id: 's-4',
@@ -41,7 +42,7 @@ export const masterSearchCatalog = [
     process: 'Classic',
     price: '₹240',
     category: ['Drinks', 'Espresso'],
-    image: 'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183530/cozy_cup_products/s-4.jpg',
   },
   {
     id: 's-5',
@@ -51,7 +52,7 @@ export const masterSearchCatalog = [
     process: 'Steamed',
     price: '₹280 / cup',
     category: ['Drinks', 'Espresso'],
-    image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183529/cozy_cup_products/s-2.jpg',
   },
   {
     id: 's-6',
@@ -61,7 +62,7 @@ export const masterSearchCatalog = [
     process: 'Nitro',
     price: '₹310',
     category: ['Drinks', 'Cold Brew'],
-    image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183532/cozy_cup_products/s-6.jpg',
   },
   {
     id: 's-7',
@@ -71,7 +72,7 @@ export const masterSearchCatalog = [
     process: 'Nitro',
     price: '₹310 / cup',
     category: ['Drinks', 'Cold Brew'],
-    image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183533/cozy_cup_products/s-7.jpg',
   },
   {
     id: 's-8',
@@ -81,7 +82,7 @@ export const masterSearchCatalog = [
     process: 'Tonic',
     price: '₹330',
     category: ['Drinks', 'Cold Brew'],
-    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183534/cozy_cup_products/s-8.jpg',
   },
   {
     id: 's-9',
@@ -91,7 +92,7 @@ export const masterSearchCatalog = [
     process: 'Frappe',
     price: '₹320 / cup',
     category: ['Drinks', 'Cold Brew'],
-    image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183535/cozy_cup_products/s-9.jpg',
   },
   {
     id: 's-10',
@@ -101,7 +102,7 @@ export const masterSearchCatalog = [
     process: 'Layered',
     price: '₹340 / cup',
     category: ['Drinks', 'Tea'],
-    image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183535/cozy_cup_products/s-10.jpg',
   },
   {
     id: 's-11',
@@ -111,7 +112,7 @@ export const masterSearchCatalog = [
     process: 'Organic',
     price: '₹310',
     category: ['Drinks', 'Tea'],
-    image: 'https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183536/cozy_cup_products/s-11.jpg',
   },
   {
     id: 's-12',
@@ -121,7 +122,7 @@ export const masterSearchCatalog = [
     process: 'Wellness',
     price: '₹260',
     category: ['Drinks', 'Tea'],
-    image: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183537/cozy_cup_products/s-12.jpg',
   },
 
   // Bakery & Food
@@ -133,7 +134,7 @@ export const masterSearchCatalog = [
     process: 'Bakery',
     price: '₹250',
     category: ['Food', 'Bakery'],
-    image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183538/cozy_cup_products/s-13.jpg',
   },
   {
     id: 's-14',
@@ -143,7 +144,7 @@ export const masterSearchCatalog = [
     process: 'Bakery',
     price: '₹230',
     category: ['Food', 'Bakery'],
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183538/cozy_cup_products/s-14.jpg',
   },
   {
     id: 's-15',
@@ -153,7 +154,7 @@ export const masterSearchCatalog = [
     process: 'Gluten-Free',
     price: '₹230',
     category: ['Food', 'Bakery'],
-    image: 'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183539/cozy_cup_products/s-15.jpg',
   },
   {
     id: 's-16',
@@ -163,7 +164,7 @@ export const masterSearchCatalog = [
     process: 'Toasted',
     price: '₹380 / slice',
     category: ['Food', 'Savory'],
-    image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183540/cozy_cup_products/s-16.jpg',
   },
   {
     id: 's-17',
@@ -173,7 +174,7 @@ export const masterSearchCatalog = [
     process: 'Specialty',
     price: '₹420',
     category: ['Food', 'Savory'],
-    image: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183541/cozy_cup_products/s-17.jpg',
   },
   {
     id: 's-18',
@@ -183,7 +184,7 @@ export const masterSearchCatalog = [
     process: 'Bakery',
     price: '₹350 / item',
     category: ['Food', 'Savory'],
-    image: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183541/cozy_cup_products/s-17.jpg',
   },
   {
     id: 's-19',
@@ -193,7 +194,7 @@ export const masterSearchCatalog = [
     process: 'Toasted',
     price: '₹290 / item',
     category: ['Food', 'Savory'],
-    image: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183541/cozy_cup_products/s-19.jpg',
   },
   {
     id: 's-20',
@@ -203,7 +204,7 @@ export const masterSearchCatalog = [
     process: 'Bakery',
     price: '₹240 / item',
     category: ['Ready to Eat', 'Bakery'],
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183538/cozy_cup_products/s-14.jpg',
   },
   {
     id: 's-21',
@@ -213,7 +214,7 @@ export const masterSearchCatalog = [
     process: 'Crisp',
     price: '₹180 / pack',
     category: ['Ready to Eat'],
-    image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183542/cozy_cup_products/s-21.jpg',
   },
   {
     id: 's-22',
@@ -223,7 +224,7 @@ export const masterSearchCatalog = [
     process: 'Gourmet',
     price: '₹499 / box',
     category: ['Ready to Eat', 'Sweets'],
-    image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183543/cozy_cup_products/s-22.jpg',
   },
 
   // Coffee Beans & Merchandise
@@ -235,7 +236,7 @@ export const masterSearchCatalog = [
     process: 'Washed',
     price: '₹650 / 340g',
     category: ['Coffee Beans', 'Bag'],
-    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183544/cozy_cup_products/s-23.jpg',
   },
   {
     id: 's-24',
@@ -245,7 +246,7 @@ export const masterSearchCatalog = [
     process: 'Honey',
     price: '₹590 / 340g',
     category: ['Coffee Beans', 'Bag'],
-    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183528/cozy_cup_products/s-1.jpg',
   },
   {
     id: 's-25',
@@ -255,7 +256,7 @@ export const masterSearchCatalog = [
     process: 'Natural',
     price: '₹620 / 340g',
     category: ['Coffee Beans', 'Bag'],
-    image: 'https://images.unsplash.com/photo-1610632380989-680fe40816c6?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183544/cozy_cup_products/s-25.jpg',
   },
   {
     id: 's-26',
@@ -265,7 +266,7 @@ export const masterSearchCatalog = [
     process: 'Washed',
     price: '₹680 / 340g',
     category: ['Coffee Beans', 'Bag'],
-    image: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183545/cozy_cup_products/s-26.jpg',
   },
   {
     id: 's-27',
@@ -275,7 +276,7 @@ export const masterSearchCatalog = [
     process: 'Washed',
     price: '₹750 / 340g',
     category: ['Coffee Beans', 'Bag'],
-    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183546/cozy_cup_products/s-27.jpg',
   },
   {
     id: 's-28',
@@ -285,7 +286,7 @@ export const masterSearchCatalog = [
     process: 'Honey',
     price: '₹720 / 340g',
     category: ['Coffee Beans', 'Bag'],
-    image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183547/cozy_cup_products/s-28.jpg',
   },
   {
     id: 's-29',
@@ -295,7 +296,7 @@ export const masterSearchCatalog = [
     process: 'Glasswork',
     price: '₹1,899 / set',
     category: ['Merchandise', 'Equipment'],
-    image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183547/cozy_cup_products/s-29.jpg',
   },
 ]
 
@@ -385,12 +386,12 @@ export default function SearchModal({ isOpen, onClose, onAddToCart }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -20 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
-          className="relative z-10 w-full max-w-3xl bg-[#FCFAF6] rounded-3xl shadow-2xl border border-[#201B15]/15 overflow-hidden flex flex-col max-h-[85vh]"
+          className="relative z-10 w-full max-w-3xl bg-[#FCFAF6] dark:bg-[#181410] rounded-3xl shadow-2xl border border-[#201B15]/15 dark:border-white/15 overflow-hidden flex flex-col max-h-[85vh] transition-colors"
         >
           {/* Top Search Input Header */}
-          <div className="p-4 sm:p-6 bg-white border-b border-[#201B15]/10 flex flex-col gap-4">
-            <div className="flex items-center gap-3 bg-[#FCFAF6] px-4 py-3 rounded-2xl border border-[#201B15]/15 focus-within:border-amber-600 focus-within:ring-2 focus-within:ring-amber-500/20 transition-all">
-              <svg className="w-6 h-6 text-[#201B15]/50 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="p-4 sm:p-6 bg-white dark:bg-[#1E1914] border-b border-[#201B15]/10 dark:border-white/10 flex flex-col gap-4 transition-colors">
+            <div className="flex items-center gap-3 bg-[#FCFAF6] dark:bg-[#15120E] px-4 py-3 rounded-2xl border border-[#201B15]/15 dark:border-white/15 focus-within:border-amber-600 dark:focus-within:border-amber-400 focus-within:ring-2 focus-within:ring-amber-500/20 transition-all">
+              <svg className="w-6 h-6 text-[#201B15]/50 dark:text-white/50 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               <input
@@ -399,13 +400,13 @@ export default function SearchModal({ isOpen, onClose, onAddToCart }) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search roasts, drinks, pastries, bags, equipment (try 'Oat', 'Cold Brew', 'Croissant')..."
-                className="w-full bg-transparent border-none outline-none font-sans text-base sm:text-lg text-[#201B15] placeholder:text-[#201B15]/40"
+                className="w-full bg-transparent border-none outline-none font-sans text-base sm:text-lg text-[#201B15] dark:text-[#FCFAF6] placeholder:text-[#201B15]/40 dark:placeholder:text-white/40"
               />
               {query && (
                 <button
                   type="button"
                   onClick={() => setQuery('')}
-                  className="w-6 h-6 rounded-full bg-[#201B15]/10 hover:bg-[#201B15]/20 flex items-center justify-center text-xs font-bold text-[#201B15] transition-colors"
+                  className="w-6 h-6 rounded-full bg-[#201B15]/10 dark:bg-white/15 hover:bg-[#201B15]/20 dark:hover:bg-white/25 flex items-center justify-center text-xs font-bold text-[#201B15] dark:text-white transition-colors cursor-pointer"
                 >
                   ✕
                 </button>
@@ -421,8 +422,8 @@ export default function SearchModal({ isOpen, onClose, onAddToCart }) {
                   onClick={() => setActiveTab(tab)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold whitespace-nowrap transition-all cursor-pointer ${
                     activeTab === tab
-                      ? 'bg-[#201B15] text-amber-300 shadow-md scale-105'
-                      : 'bg-[#201B15]/5 hover:bg-[#201B15]/10 text-[#201B15]/70'
+                      ? 'bg-[#201B15] dark:bg-amber-400 text-amber-300 dark:text-[#201B15] shadow-md scale-105'
+                      : 'bg-[#201B15]/5 dark:bg-white/10 hover:bg-[#201B15]/10 dark:hover:bg-white/20 text-[#201B15]/70 dark:text-white/80'
                   }`}
                 >
                   {tab}
@@ -435,24 +436,24 @@ export default function SearchModal({ isOpen, onClose, onAddToCart }) {
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3">
             {filteredItems.length === 0 ? (
               <div className="py-12 text-center space-y-3">
-                <div className="w-16 h-16 bg-[#EBE5D8] rounded-full flex items-center justify-center mx-auto text-2xl">
+                <div className="w-16 h-16 bg-[#EBE5D8] dark:bg-[#1E1914] rounded-full flex items-center justify-center mx-auto text-2xl">
                   ☕
                 </div>
-                <h4 className="font-display italic text-2xl text-[#201B15]">No matching cravings found</h4>
-                <p className="text-xs sm:text-sm text-[#201B15]/60 max-w-sm mx-auto">
+                <h4 className="font-display italic text-2xl text-[#201B15] dark:text-[#FCFAF6]">No matching cravings found</h4>
+                <p className="text-xs sm:text-sm text-[#201B15]/60 dark:text-white/60 max-w-sm mx-auto">
                   We couldn't find anything matching "{query}". Try searching for another roast, drink, or pastry.
                 </p>
                 <button
                   type="button"
                   onClick={() => setQuery('')}
-                  className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#201B15] text-white text-xs font-semibold hover:bg-[#342A21] transition-all"
+                  className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#201B15] dark:bg-amber-400 text-white dark:text-[#201B15] text-xs font-semibold hover:bg-[#342A21] dark:hover:bg-amber-300 transition-all cursor-pointer"
                 >
                   Clear search query
                 </button>
               </div>
             ) : (
               <>
-                <div className="flex justify-between items-center text-xs font-mono text-[#201B15]/60 px-1 mb-2">
+                <div className="flex justify-between items-center text-xs font-mono text-[#201B15]/60 dark:text-white/60 px-1 mb-2">
                   <span>Showing {filteredItems.length} {filteredItems.length === 1 ? 'result' : 'results'}</span>
                   <span className="hidden sm:inline">Press ESC to close</span>
                 </div>
@@ -463,16 +464,18 @@ export default function SearchModal({ isOpen, onClose, onAddToCart }) {
                     return (
                       <div
                         key={item.id || item.origin}
-                        className="bg-white p-3.5 rounded-2xl border border-[#201B15]/10 hover:border-amber-600/40 hover:shadow-md transition-all flex gap-3.5 items-center group"
+                        className="bg-white dark:bg-[#1E1914] p-3.5 rounded-2xl border border-[#201B15]/10 dark:border-white/10 hover:border-amber-600/40 dark:hover:border-amber-400/50 hover:shadow-md transition-all flex gap-3.5 items-center group"
                       >
                         {/* Thumbnail image */}
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-[#EBE5D8] shrink-0 relative">
-                          <img
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-[#EBE5D8] dark:bg-[#15120E] shrink-0 relative">
+                          <OptimizedImage
                             src={item.image}
                             alt={item.origin}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            width={200}
+                            containerClassName="w-full h-full"
+                            className="group-hover:scale-110 transition-transform duration-500"
                           />
-                          <span className="absolute bottom-1 right-1 bg-black/70 backdrop-blur-xs text-amber-300 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded">
+                          <span className="absolute bottom-1 right-1 z-10 bg-black/70 backdrop-blur-xs text-amber-300 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border border-white/10">
                             {item.process}
                           </span>
                         </div>
@@ -480,16 +483,16 @@ export default function SearchModal({ isOpen, onClose, onAddToCart }) {
                         {/* Details */}
                         <div className="flex-1 min-w-0 flex flex-col justify-between h-full">
                           <div>
-                            <h4 className="font-display font-bold text-base text-[#201B15] truncate group-hover:text-amber-800 transition-colors">
+                            <h4 className="font-display font-bold text-base text-[#201B15] dark:text-[#FCFAF6] truncate group-hover:text-amber-800 dark:group-hover:text-amber-300 transition-colors">
                               {item.origin}
                             </h4>
-                            <p className="text-[11px] text-[#201B15]/65 line-clamp-2 mt-0.5 leading-snug">
+                            <p className="text-[11px] text-[#201B15]/65 dark:text-white/65 line-clamp-2 mt-0.5 leading-snug">
                               {item.tasteLine}
                             </p>
                           </div>
 
-                          <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-[#201B15]/10">
-                            <span className="font-mono text-sm font-bold text-[#201B15]">{item.price}</span>
+                          <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-[#201B15]/10 dark:border-white/10">
+                            <span className="font-mono text-sm font-bold text-[#201B15] dark:text-amber-300">{item.price}</span>
 
                             <button
                               type="button"
@@ -497,7 +500,7 @@ export default function SearchModal({ isOpen, onClose, onAddToCart }) {
                               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer shadow-sm ${
                                 isAdded
                                   ? 'bg-emerald-700 text-white scale-95'
-                                  : 'bg-[#201B15] hover:bg-[#342A21] text-white active:scale-95'
+                                  : 'bg-[#201B15] hover:bg-[#342A21] dark:bg-amber-400 dark:hover:bg-amber-300 text-white dark:text-[#201B15] active:scale-95'
                               }`}
                             >
                               {isAdded ? (
@@ -527,12 +530,12 @@ export default function SearchModal({ isOpen, onClose, onAddToCart }) {
           </div>
 
           {/* Modal Footer */}
-          <div className="p-3.5 sm:p-4 bg-white border-t border-[#201B15]/10 flex items-center justify-between text-xs font-mono text-[#201B15]/60">
+          <div className="p-3.5 sm:p-4 bg-white dark:bg-[#1E1914] border-t border-[#201B15]/10 dark:border-white/10 flex items-center justify-between text-xs font-mono text-[#201B15]/60 dark:text-white/60 transition-colors">
             <span>💡 Pro tip: Search by tasting notes like "honey", "chocolate", or "citrus"</span>
             <button
               type="button"
               onClick={onClose}
-              className="px-3 py-1 rounded-lg bg-[#201B15]/5 hover:bg-[#201B15]/15 font-bold text-[#201B15] transition-colors cursor-pointer"
+              className="px-3 py-1 rounded-lg bg-[#201B15]/5 dark:bg-white/10 hover:bg-[#201B15]/15 dark:hover:bg-white/20 font-bold text-[#201B15] dark:text-white transition-colors cursor-pointer"
             >
               Close [ESC]
             </button>

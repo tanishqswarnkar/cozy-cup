@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background Circle for Contrast -->
+  <circle cx="32" cy="32" r="30" fill="#23201D" stroke="#F59E0B" stroke-width="3"/>
+  
+  <!-- Steam Wisps -->
+  <path d="M25 15C25 12 27 10 27 7" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <path d="M32 13C32 10 34 8 34 5" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M39 15C39 12 41 10 41 7" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+
+  <!-- Coffee Cup Saucer -->
+  <path d="M14 53C14 54.6569 15.3431 56 17 56H43C44.6569 56 46 54.6569 46 53C46 52.4477 45.5523 52 45 52H15C14.4477 52 14 52.4477 14 53Z" fill="#F59E0B"/>
+
+  <!-- Coffee Cup Body -->
+  <path d="M16 22H44V36C44 43.732 37.732 50 30 50C22.268 50 16 43.732 16 36V22Z" fill="#FBBF24"/>
+  <path d="M18 24H42V36C42 42.6274 36.6274 48 30 48C23.3726 48 18 42.6274 18 36V24Z" fill="#D97706"/>
+
+  <!-- Coffee Fill Inside Cup -->
+  <ellipse cx="30" cy="24" rx="12" ry="3" fill="#382BF0" opacity="0.15"/>
+  <ellipse cx="30" cy="24" rx="11" ry="2.5" fill="#451A03"/>
+
+  <!-- Coffee Cup Handle -->
+  <path d="M44 26H49C51.7614 26 54 28.2386 54 31V33C54 35.7614 51.7614 38 49 38H43.5" stroke="#FBBF24" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44 26H49C51.7614 26 54 28.2386 54 31V33C54 35.7614 51.7614 38 49 38H43.5" stroke="#D97706" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Highlight Reflection on Cup -->
+  <path d="M22 28V37C22 41 24 44 27 45" stroke="#FDE68A" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+</svg>

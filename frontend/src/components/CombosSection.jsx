@@ -16,7 +16,7 @@ const combosData = [
     originalPrice: '₹550',
     price: '₹450',
     savings: 'Save ₹100',
-    image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183547/cozy_cup_products/s-28.jpg',
     origin: 'Morning Awakening Pairing (Combo)',
     tasteLine: 'Pour-over coffee & artisan croissant pairing',
   },
@@ -34,7 +34,7 @@ const combosData = [
     originalPrice: '₹520',
     price: '₹420',
     savings: 'Save ₹100',
-    image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183675/cozy_cup_products/gallery-2.jpg',
     origin: "Roaster's Lunch Duo (Combo)",
     tasteLine: 'Iced coffee cloud & toasted sourdough sandwich pairing',
   },
@@ -52,7 +52,7 @@ const combosData = [
     originalPrice: '₹620',
     price: '₹499',
     savings: 'Save ₹121',
-    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183528/cozy_cup_products/s-1.jpg',
     origin: 'After-Hours Indulgence (Combo)',
     tasteLine: 'Nitro cold brew & artisanal chocolate truffles pairing',
   },
@@ -70,7 +70,7 @@ const combosData = [
     originalPrice: '₹950',
     price: '₹750',
     savings: 'Save ₹200',
-    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop',
+    image: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183546/cozy_cup_products/s-27.jpg',
     origin: 'Ultimate Cozy Feast for Two (Combo)',
     tasteLine: '2x Specialty lattes, 2x bagels & cinnamon roll sharing spread',
   },
@@ -93,7 +93,7 @@ export default function CombosSection({ user, onOpenAuth, onAddToCart }) {
   }
 
   return (
-    <section className="px-4 sm:px-10 md:px-16 py-12 sm:py-16 md:py-20 bg-[#FCFAF6] border-t border-[#201B15]/10">
+    <section className="px-4 sm:px-10 md:px-16 py-12 sm:py-16 md:py-20 bg-[#FCFAF6] dark:bg-[#181410] border-t border-[#201B15]/10 dark:border-white/10 transition-colors">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
@@ -101,40 +101,40 @@ export default function CombosSection({ user, onOpenAuth, onAddToCart }) {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true, amount: 0.2 }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-14 pb-5 border-b border-[#201B15]/15"
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-14 pb-5 border-b border-[#201B15]/15 dark:border-white/15 transition-colors"
         >
           <div>
-            <span className="block font-mono text-[11px] sm:text-xs uppercase tracking-widest text-[#201B15]/60 mb-2 font-semibold">
+            <span className="block font-mono text-[11px] sm:text-xs uppercase tracking-widest text-[#201B15]/60 dark:text-white/60 mb-2 font-semibold">
               Curated Roastery Pairings
             </span>
-            <h2 className="font-display italic font-bold text-3xl sm:text-4xl md:text-5xl text-[#201B15] tracking-tight">
+            <h2 className="font-display italic font-bold text-3xl sm:text-4xl md:text-5xl text-[#201B15] dark:text-[#FCFAF6] tracking-tight transition-colors">
               Cozy Cup Specialty Combos
             </h2>
-            <p className="text-sm sm:text-base text-[#201B15]/75 mt-2 max-w-2xl font-normal leading-relaxed">
+            <p className="text-sm sm:text-base text-[#201B15]/75 dark:text-white/75 mt-2 max-w-2xl font-normal leading-relaxed transition-colors">
               Handcrafted pairings designed by our master roasters and bakers. Experience harmonious flavor profiles at exclusive member combo pricing.
             </p>
           </div>
           <div className="shrink-0 flex items-center gap-2">
-            <span className="px-4 py-1.5 rounded-full bg-[#201B15] text-amber-300 font-mono text-xs font-bold uppercase tracking-wider shadow-sm">
+            <span className="px-4 py-1.5 rounded-full bg-[#201B15] dark:bg-amber-400 text-amber-300 dark:text-[#201B15] font-mono text-xs font-bold uppercase tracking-wider shadow-sm transition-colors">
               Limited Daily Batches
             </span>
           </div>
         </motion.div>
 
         {/* Combos Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {combosData.map((combo, idx) => (
             <motion.div
               key={combo.id}
-              initial={{ opacity: 0, y: 40, scale: 0.96 }}
+              initial={{ opacity: 0, y: 45, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.55, delay: idx * 0.12, ease: 'easeOut' }}
               viewport={{ once: true, amount: 0.15 }}
-              className="group relative bg-[#F4EFE6] rounded-3xl overflow-hidden border border-[#201B15]/15 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
+              className="group relative bg-[#F4EFE6] dark:bg-[#1E1914] rounded-3xl overflow-hidden border border-[#201B15]/15 dark:border-white/15 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 {/* Image & Badges Header */}
-                <div className="relative h-60 sm:h-64 overflow-hidden bg-[#201B15]/10">
+                <div className="relative h-60 sm:h-64 overflow-hidden bg-[#201B15]/10 dark:bg-[#15120E]">
                   <img
                     src={combo.image}
                     alt={combo.title}
@@ -170,18 +170,18 @@ export default function CombosSection({ user, onOpenAuth, onAddToCart }) {
 
                 {/* Combo Description & Breakdown */}
                 <div className="p-6 sm:p-8">
-                  <p className="text-xs sm:text-sm text-[#201B15]/80 leading-relaxed font-normal mb-5">
+                  <p className="text-xs sm:text-sm text-[#201B15]/80 dark:text-white/80 leading-relaxed font-normal mb-5">
                     {combo.description}
                   </p>
 
-                  <div className="bg-[#FCFAF6] rounded-2xl p-4 sm:p-5 border border-[#201B15]/10 mb-6">
-                    <span className="block font-mono text-[11px] uppercase tracking-widest text-[#201B15]/60 mb-2.5 font-bold">
+                  <div className="bg-[#FCFAF6] dark:bg-[#15120E] rounded-2xl p-4 sm:p-5 border border-[#201B15]/10 dark:border-white/10 mb-6 transition-colors">
+                    <span className="block font-mono text-[11px] uppercase tracking-widest text-[#201B15]/60 dark:text-white/60 mb-2.5 font-bold">
                       What's Included:
                     </span>
                     <ul className="space-y-2">
                       {combo.itemsIncluded.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-xs sm:text-[13.5px] text-[#201B15] font-medium">
-                          <span className="text-amber-600 font-bold mt-0.5">•</span>
+                        <li key={i} className="flex items-start gap-2.5 text-xs sm:text-[13.5px] text-[#201B15] dark:text-[#FCFAF6] font-medium">
+                          <span className="text-amber-600 dark:text-amber-400 font-bold mt-0.5">•</span>
                           <span>{item}</span>
                         </li>
                       ))}

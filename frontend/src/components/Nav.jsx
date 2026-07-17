@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Link, scroller } from 'react-scroll'
+import { useTheme } from '../context/ThemeContext.jsx'
 
 export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSearch, cartCount = 0 }) {
+  const { isDark, toggleTheme } = useTheme()
   const [showUserMenu, setShowUserMenu] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showFeedbackModal, setShowFeedbackModal] = useState(false)
@@ -84,16 +86,16 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
 
   return (
     <>
-      <nav className="flex items-center justify-between px-3.5 sm:px-8 md:px-16 py-3.5 sm:py-5 border-b border-white/10 bg-[#23201D]/95 text-[#FCFAF6] shadow-xl backdrop-blur-md sticky top-0 z-40 transition-all">
+      <nav className="flex items-center justify-between px-3.5 sm:px-8 md:px-16 py-3.5 sm:py-5 border-b border-white/10 bg-[#23201D]/95 text-[#FCFAF6] shadow-xl backdrop-blur-md fixed top-0 left-0 right-0 w-full z-50 transition-all">
         <div 
           onClick={handleLogoClick}
           className="flex items-center gap-2 sm:gap-3 group hover:opacity-95 transition-all shrink-0 cursor-pointer"
         >
           <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-white/20 shadow-sm shrink-0 group-hover:scale-105 transition-transform bg-[#FCFAF6]">
             <img 
-              src="/cozy-cup-logo.png" 
+              src="https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183863/cozy_cup_static/cozy-cup-logo.png" 
               alt="Cozy Cup Logo" 
-              className="w-full h-full object-cover scale-105"
+              className="w-full h-full object-contain scale-105"
             />
           </div>
           <span className="font-display italic font-bold text-lg sm:text-2xl tracking-tight text-[#FCFAF6] group-hover:text-amber-300 transition-colors">
@@ -127,6 +129,21 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
             <span className="hidden md:inline-block bg-white/15 text-[10px] font-mono px-1.5 py-0.2 rounded text-white/80">⌘K</span>
           </button>
 
+          {/* Theme Mode Toggle Switch (Prominent Pill with Icon & Text) */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle Dark/Light Theme"
+            title={isDark ? "Switch to Warm Cream Light Mode ☀️" : "Switch to Obsidian Roastery Dark Mode 🌙"}
+            className="bg-white/10 hover:bg-amber-400 text-amber-300 hover:text-[#201B15] border border-white/20 hover:border-amber-400 rounded-full px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold transition-all duration-300 active:scale-95 flex items-center gap-1 sm:gap-1.5 shadow-sm shrink-0 cursor-pointer group select-none"
+          >
+            <span className="text-sm sm:text-base leading-none group-hover:scale-110 transition-transform">
+              {isDark ? '☀️' : '🌙'}
+            </span>
+            <span className="font-mono tracking-tight font-bold whitespace-nowrap">
+              {isDark ? 'Light Mode' : 'Dark Mode'}
+            </span>
+          </button>
+
           {/* Cart Button */}
           <button
             onClick={onOpenCart}
@@ -149,10 +166,10 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
               <button
                 onClick={() => setShowUserMenu((prev) => !prev)}
                 title={`Logged in as ${user.name} — Click for options`}
-                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 text-amber-300 font-display font-bold text-sm sm:text-base flex items-center justify-center shadow-md border border-white/20 hover:border-amber-400 active:scale-95 transition-all relative shrink-0 cursor-pointer backdrop-blur-sm"
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 text-amber-300 font-display font-bold text-sm sm:text-base flex items-center justify-center shadow-md border border-white/20 hover:border-amber-400 active:scale-95 transition-all relative shrink-0 cursor-pointer backdrop-blur-sm select-none"
               >
-                <span>{user.name ? user.name.charAt(0).toUpperCase() : 'U'}</span>
-                <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-500 absolute -bottom-0.5 -right-0.5 border border-[#23201D]" />
+                <span>{user.name && typeof user.name === 'string' ? user.name.trim().charAt(0).toUpperCase() : 'U'}</span>
+                <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-500 absolute -bottom-0.5 -right-0.5 border border-[#23201D] z-10" />
               </button>
 
               {/* Floating Dropdown Popover Menu */}
@@ -162,10 +179,6 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
                   <div className="pb-3 border-b border-white/10 px-2 pt-1">
                     <p className="font-display font-bold text-sm text-amber-300 truncate">{user.name}</p>
                     <p className="text-[11px] font-mono text-white/60 truncate">{user.email || 'Roastery Member'}</p>
-                    <div className="mt-1.5 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[9.5px] font-mono w-fit shadow-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                      <span>JWT Secured (30d)</span>
-                    </div>
                   </div>
 
                   {/* Menu Action Sections */}
@@ -252,11 +265,28 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
           </button>
         </div>
       </nav>
+      {/* Spacer to offset fixed navbar height so content underneath does not get covered */}
+      <div className="h-[61px] sm:h-[81px] w-full shrink-0" />
 
       {/* Mobile Slide-Down Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#181410]/98 border-b border-white/15 px-5 py-6 shadow-2xl backdrop-blur-xl sticky top-[60px] sm:top-[70px] z-30 animate-fadeIn">
+        <div className="lg:hidden bg-[#181410]/98 border-b border-white/15 px-5 py-6 shadow-2xl backdrop-blur-xl fixed top-[61px] sm:top-[81px] left-0 right-0 w-full z-40 animate-fadeIn max-h-[calc(100vh-81px)] overflow-y-auto">
           <div className="flex flex-col space-y-3">
+            <button
+              onClick={() => {
+                toggleTheme()
+              }}
+              className="w-full text-left px-4 py-3.5 rounded-2xl bg-white/10 hover:bg-amber-400 text-amber-300 hover:text-[#201B15] border border-white/20 font-display font-bold text-base tracking-wide transition-all flex items-center justify-between shadow-md cursor-pointer select-none"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl">{isDark ? '☀️' : '🌙'}</span>
+                <span>Switch to {isDark ? 'Light Mode' : 'Dark Mode'}</span>
+              </div>
+              <span className="text-[11px] bg-white/15 px-2.5 py-1 rounded-full font-mono font-bold">
+                {isDark ? 'Dark Mode Active' : 'Light Mode Active'}
+              </span>
+            </button>
+
             <button
               onClick={() => {
                 setMobileMenuOpen(false)

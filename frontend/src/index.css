@@ -2,7 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #E8E2D3;
-  color: #201B15;
+@layer base {
+  * {
+    cursor: url('/portafilter.svg') 4 4, auto !important;
+  }
+  body {
+    @apply bg-[#E8E2D3] text-[#201B15] dark:bg-[#15120E] dark:text-[#E8E2D3] transition-colors duration-500 ease-out;
+  }
+}
+
+/* Custom dark mode scrollbar */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #15120E;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2E251C;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #C79A3C;
 }

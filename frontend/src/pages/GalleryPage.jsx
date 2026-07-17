@@ -12,63 +12,63 @@ export default function GalleryPage() {
   const galleryCatalog = [
     {
       id: 'gal-1',
-      url: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1000&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183673/cozy_cup_products/hero-1.jpg',
       title: 'Warm Morning Sunlight',
       tag: 'Interior & Vibe',
       desc: 'Our Seattle flagship roastery bathed in gentle morning light right as the doors open at 6:00 AM.',
     },
     {
       id: 'gal-2',
-      url: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183528/cozy_cup_products/s-1.jpg',
       title: 'Rosetta Pour in Progress',
       tag: 'Latte Art',
       desc: 'A senior barista crafting a delicate 6-tier rosetta pattern into an organic honey oat milk latte.',
     },
     {
       id: 'gal-3',
-      url: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=1000&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183674/cozy_cup_products/gallery-1.jpg',
       title: 'Small Batch Drum Roasting',
       tag: 'Roastery',
       desc: 'Our vintage 12kg Probat roaster transforming green Ethiopian Yirgacheffe beans into fragrant golden-brown perfection.',
     },
     {
       id: 'gal-4',
-      url: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1000&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183675/cozy_cup_products/gallery-2.jpg',
       title: 'Cozy Corner Sanctuary Booths',
       tag: 'Interior & Vibe',
       desc: 'Designed with acoustic walnut wood panels, plush amber leather, and soft Edison lighting for ultimate focus and comfort.',
     },
     {
       id: 'gal-5',
-      url: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=1000&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183676/cozy_cup_products/about-1.jpg',
       title: 'V60 Pour Over Bloom',
       tag: 'Latte Art',
       desc: 'Precision temperature extraction unlocking bright jasmine, bergamot, and sweet stone fruit notes.',
     },
     {
       id: 'gal-6',
-      url: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183547/cozy_cup_products/s-28.jpg',
       title: 'Oven-Fresh Almond Croissants',
       tag: 'Bakery & Treats',
       desc: 'Laminated French butter pastry baked fresh every morning, dusted with powdered sugar and almond slices.',
     },
     {
       id: 'gal-7',
-      url: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=1000&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183544/cozy_cup_products/s-23.jpg',
       title: 'Single-Origin Bean Packaging',
       tag: 'Roastery',
       desc: 'Our 100% compostable direct-trade bags resting inside our climate-controlled bean curing room.',
     },
     {
       id: 'gal-8',
-      url: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=1000&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183535/cozy_cup_products/s-9.jpg',
       title: 'Iced Mocha Frappe Indulgence',
       tag: 'Latte Art',
       desc: 'Cold brewed espresso layered with Valrhona dark chocolate drizzle and fluffy vanilla bean cream.',
     },
     {
       id: 'gal-9',
-      url: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=1000&auto=format&fit=crop',
+      url: 'https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183540/cozy_cup_products/s-16.jpg',
       title: 'Artisan Sourdough Paninis',
       tag: 'Bakery & Treats',
       desc: 'Handmade paninis toasted to crispy golden perfection with melted fresh mozzarella and organic basil pesto.',
@@ -81,13 +81,13 @@ export default function GalleryPage() {
       : galleryCatalog.filter((item) => item.tag === selectedTag)
 
   return (
-    <div className="min-h-screen bg-[#FCFAF6] flex flex-col justify-between pt-8 sm:pt-12 px-4 sm:px-10 md:px-16 animate-fadeIn">
+    <div className="min-h-screen bg-[#FCFAF6] dark:bg-[#181410] flex flex-col justify-between pt-8 sm:pt-12 px-4 sm:px-10 md:px-16 animate-fadeIn transition-colors">
       <div className="max-w-7xl mx-auto w-full pb-24">
         {/* Navigation Back */}
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono tracking-wider uppercase text-[#201B15]/70 hover:text-[#201B15] transition-colors"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono tracking-wider uppercase text-[#201B15]/70 dark:text-white/70 hover:text-[#201B15] dark:hover:text-white transition-colors"
           >
             <span>←</span>
             <span>Back to Home</span>
@@ -99,15 +99,15 @@ export default function GalleryPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="border-b border-[#201B15]/15 pb-10 mb-10 text-center max-w-3xl mx-auto"
+          className="border-b border-[#201B15]/15 dark:border-white/15 pb-10 mb-10 text-center max-w-3xl mx-auto transition-colors"
         >
-          <span className="font-mono text-xs uppercase tracking-widest text-amber-800 font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-widest text-amber-800 dark:text-amber-400 font-bold block mb-2 transition-colors">
             Visual Experience
           </span>
-          <h1 className="font-display font-bold text-4xl sm:text-6xl text-[#201B15]">
+          <h1 className="font-display font-bold text-4xl sm:text-6xl text-[#201B15] dark:text-[#FCFAF6] transition-colors">
             The Cozy Cup Gallery
           </h1>
-          <p className="text-sm sm:text-base text-[#201B15]/75 mt-3 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#201B15]/75 dark:text-white/75 mt-3 leading-relaxed transition-colors">
             Take a visual journey inside our roastery, explore our baristas' meticulous extraction craft, and immerse yourself in the warm community atmosphere we cherish. Click any photo to zoom.
           </p>
         </motion.div>
@@ -120,8 +120,8 @@ export default function GalleryPage() {
               onClick={() => setSelectedTag(tag)}
               className={`px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 selectedTag === tag
-                  ? 'bg-[#201B15] text-amber-300 shadow-md scale-105'
-                  : 'bg-white/80 text-[#201B15]/80 hover:bg-white hover:text-[#201B15] border border-[#201B15]/10'
+                  ? 'bg-[#201B15] dark:bg-amber-400 text-amber-300 dark:text-[#201B15] shadow-md scale-105'
+                  : 'bg-white/80 dark:bg-white/10 text-[#201B15]/80 dark:text-white/80 hover:bg-white dark:hover:bg-white/20 hover:text-[#201B15] dark:hover:text-white border border-[#201B15]/10 dark:border-white/10'
               }`}
             >
               {tag}
@@ -130,12 +130,12 @@ export default function GalleryPage() {
         </div>
 
         {/* Results Counter */}
-        <div className="flex justify-between items-center mb-6 text-xs font-mono tracking-widest text-[#201B15]/60 uppercase">
+        <div className="flex justify-between items-center mb-6 text-xs font-mono tracking-widest text-[#201B15]/60 dark:text-white/60 uppercase transition-colors">
           <span>
             {filteredPhotos.length} {filteredPhotos.length === 1 ? 'Photo' : 'Photos'} Displayed
           </span>
           {selectedTag !== 'All Photos' && (
-            <span className="text-amber-800 font-semibold">{selectedTag}</span>
+            <span className="text-amber-800 dark:text-amber-400 font-semibold">{selectedTag}</span>
           )}
         </div>
 

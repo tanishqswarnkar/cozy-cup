@@ -1,0 +1,162 @@
+{
+  "s-1": {
+    "name": "Double Espresso Cloud",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183528/cozy_cup_products/s-1.jpg",
+    "public_id": "cozy_cup_products/s-1"
+  },
+  "s-2": {
+    "name": "Oat Milk Honey Latte",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183529/cozy_cup_products/s-2.jpg",
+    "public_id": "cozy_cup_products/s-2"
+  },
+  "s-3": {
+    "name": "Bergamot Jasmine Macchiato",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183530/cozy_cup_products/s-3.jpg",
+    "public_id": "cozy_cup_products/s-3"
+  },
+  "s-4": {
+    "name": "Classic Flat White",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183530/cozy_cup_products/s-4.jpg",
+    "public_id": "cozy_cup_products/s-4"
+  },
+  "s-6": {
+    "name": "Nitro Honey Cold Brew",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183532/cozy_cup_products/s-6.jpg",
+    "public_id": "cozy_cup_products/s-6"
+  },
+  "s-7": {
+    "name": "Cold Brew Nitro Float",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183533/cozy_cup_products/s-7.jpg",
+    "public_id": "cozy_cup_products/s-7"
+  },
+  "s-8": {
+    "name": "Yuzu Tonic Espresso",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183534/cozy_cup_products/s-8.jpg",
+    "public_id": "cozy_cup_products/s-8"
+  },
+  "s-9": {
+    "name": "Iced Mocha Frappe",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183535/cozy_cup_products/s-9.jpg",
+    "public_id": "cozy_cup_products/s-9"
+  },
+  "s-10": {
+    "name": "Matcha Espresso Fusion",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183535/cozy_cup_products/s-10.jpg",
+    "public_id": "cozy_cup_products/s-10"
+  },
+  "s-11": {
+    "name": "Ceremonial Matcha Latte",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183536/cozy_cup_products/s-11.jpg",
+    "public_id": "cozy_cup_products/s-11"
+  },
+  "s-12": {
+    "name": "Golden Turmeric Chai",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183537/cozy_cup_products/s-12.jpg",
+    "public_id": "cozy_cup_products/s-12"
+  },
+  "s-13": {
+    "name": "Cardamom Almond Croissant",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183538/cozy_cup_products/s-13.jpg",
+    "public_id": "cozy_cup_products/s-13"
+  },
+  "s-14": {
+    "name": "Valrhona Chocolate Brioche",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183538/cozy_cup_products/s-14.jpg",
+    "public_id": "cozy_cup_products/s-14"
+  },
+  "s-15": {
+    "name": "Gluten-Free Blueberry Loaf",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183539/cozy_cup_products/s-15.jpg",
+    "public_id": "cozy_cup_products/s-15"
+  },
+  "s-16": {
+    "name": "Avocado & Pesto Panini",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183540/cozy_cup_products/s-16.jpg",
+    "public_id": "cozy_cup_products/s-16"
+  },
+  "s-17": {
+    "name": "Prosciutto & Fig Tartine",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183541/cozy_cup_products/s-17.jpg",
+    "public_id": "cozy_cup_products/s-17"
+  },
+  "s-19": {
+    "name": "Spinach & Feta Breakfast Wrap",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183541/cozy_cup_products/s-19.jpg",
+    "public_id": "cozy_cup_products/s-19"
+  },
+  "s-21": {
+    "name": "Almond Biscotti Duo",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183542/cozy_cup_products/s-21.jpg",
+    "public_id": "cozy_cup_products/s-21"
+  },
+  "s-22": {
+    "name": "Artisanal Truffle Box",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183543/cozy_cup_products/s-22.jpg",
+    "public_id": "cozy_cup_products/s-22"
+  },
+  "s-23": {
+    "name": "Yirgacheffe, Ethiopia Bag",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183544/cozy_cup_products/s-23.jpg",
+    "public_id": "cozy_cup_products/s-23"
+  },
+  "s-25": {
+    "name": "Mandheling, Sumatra Bag",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183544/cozy_cup_products/s-25.jpg",
+    "public_id": "cozy_cup_products/s-25"
+  },
+  "s-26": {
+    "name": "Antigua, Guatemala Bag",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183545/cozy_cup_products/s-26.jpg",
+    "public_id": "cozy_cup_products/s-26"
+  },
+  "s-27": {
+    "name": "Nyeri AA, Kenya Bag",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183546/cozy_cup_products/s-27.jpg",
+    "public_id": "cozy_cup_products/s-27"
+  },
+  "s-28": {
+    "name": "Tarrazú, Costa Rica Bag",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183547/cozy_cup_products/s-28.jpg",
+    "public_id": "cozy_cup_products/s-28"
+  },
+  "s-29": {
+    "name": "Pour-Over Glass Carafe Set",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183547/cozy_cup_products/s-29.jpg",
+    "public_id": "cozy_cup_products/s-29"
+  },
+  "hero-1": {
+    "name": "Hero Main Roast",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183673/cozy_cup_products/hero-1.jpg",
+    "public_id": "cozy_cup_products/hero-1"
+  },
+  "gallery-1": {
+    "name": "Gallery Barista Pour",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183674/cozy_cup_products/gallery-1.jpg",
+    "public_id": "cozy_cup_products/gallery-1"
+  },
+  "gallery-2": {
+    "name": "Gallery Espresso Shot",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183675/cozy_cup_products/gallery-2.jpg",
+    "public_id": "cozy_cup_products/gallery-2"
+  },
+  "about-1": {
+    "name": "About Roastery",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183676/cozy_cup_products/about-1.jpg",
+    "public_id": "cozy_cup_products/about-1"
+  },
+  "combo-3": {
+    "name": "Brewers Choice Combo",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183680/cozy_cup_products/combo-3.jpg",
+    "public_id": "cozy_cup_products/combo-3"
+  },
+  "combo-1": {
+    "name": "Morning Boost Combo",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183718/cozy_cup_products/combo-1.jpg",
+    "public_id": "cozy_cup_products/combo-1"
+  },
+  "combo-2": {
+    "name": "Artisanal Pairing Combo",
+    "secure_url": "https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183718/cozy_cup_products/combo-2.jpg",
+    "public_id": "cozy_cup_products/combo-2"
+  }
+}

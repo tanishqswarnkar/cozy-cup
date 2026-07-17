@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36" fill="none">
+  <!-- Soft Drop Shadow for Cursor Visibility -->
+  <filter id="shadow" x="-2" y="-2" width="40" height="40" filterUnits="userSpaceOnUse">
+    <feDropShadow dx="1.5" dy="2.5" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.65"/>
+  </filter>
+
+  <g filter="url(#shadow)">
+    <!-- Espresso Machine Spouts (Twin Spouts underneath head) -->
+    <path d="M5 13C4.5 15.5 3 17 2 18.5" stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 14C12.5 16.5 14 18 15 19.5" stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Golden Espresso Drip coming out of left spout (Hotspot tip around 2,18) -->
+    <circle cx="2" cy="21" r="1.5" fill="#FBBF24"/>
+    <circle cx="15.5" cy="22" r="1.2" fill="#D97706"/>
+
+    <!-- Portafilter Wooden Handle (Angled from head out to bottom right 33, 33) -->
+    <path d="M16 16L32.5 32.5" stroke="#451A03" stroke-width="7" stroke-linecap="round"/>
+    <path d="M16 16L32.5 32.5" stroke="#92400E" stroke-width="5" stroke-linecap="round"/>
+    <!-- Wooden Handle Highlight -->
+    <path d="M18 17L31 30" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" opacity="0.8"/>
+    <!-- Chrome Metal Neck Connecting Handle to Head -->
+    <path d="M13 13L17 17" stroke="#E4E4E7" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M14 14L16.5 16.5" stroke="#A1A1AA" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Portafilter Round Metal Basket Head (Hotspot around 8, 8) -->
+    <circle cx="8.5" cy="8.5" r="7.5" fill="#27272A" stroke="#E4E4E7" stroke-width="2.2"/>
+    <!-- Inner Golden Espresso Crema Rim -->
+    <circle cx="8.5" cy="8.5" r="5" fill="#451A03" stroke="#F59E0B" stroke-width="1.5"/>
+    <!-- Coffee Basket Holes/Texture inside -->
+    <circle cx="8.5" cy="8.5" r="2.5" fill="#78350F"/>
+    <circle cx="8.5" cy="8.5" r="1" fill="#FDE68A"/>
+    <!-- Metal Locking Ears/Lugs on top and left of head -->
+    <path d="M13.5 3.5L15.5 1.5" stroke="#D4D4D8" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M3.5 13.5L1.5 15.5" stroke="#D4D4D8" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -35,16 +35,16 @@ export default function MenuSection() {
   }
 
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-10 md:px-16 bg-[#F8F5F0] border-t border-[#201B15]/10">
+    <section className="py-16 sm:py-24 px-4 sm:px-10 md:px-16 bg-[#F8F5F0] dark:bg-[#181410] border-t border-[#201B15]/10 dark:border-white/10 transition-colors">
       <div className="max-w-6xl mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-          <span className="font-mono text-xs uppercase tracking-widest text-amber-800 font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-widest text-amber-800 dark:text-amber-400 font-bold block mb-2 transition-colors">
             Freshly Prepared
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#201B15]">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#201B15] dark:text-[#FCFAF6] transition-colors">
             Our Cafe Menu
           </h2>
-          <p className="text-sm sm:text-base text-[#201B15]/70 mt-3">
+          <p className="text-sm sm:text-base text-[#201B15]/70 dark:text-white/70 mt-3 transition-colors">
             Every cup and pastry is handcrafted to order using sustainably sourced organic ingredients and direct-trade coffee beans.
           </p>
         </div>
@@ -57,8 +57,8 @@ export default function MenuSection() {
               onClick={() => setActiveTab(tab)}
               className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 activeTab === tab
-                  ? 'bg-[#201B15] text-amber-300 shadow-md scale-105'
-                  : 'bg-white/80 text-[#201B15]/80 hover:bg-white hover:text-[#201B15] border border-[#201B15]/10'
+                  ? 'bg-[#201B15] dark:bg-amber-400 text-amber-300 dark:text-[#201B15] shadow-md scale-105'
+                  : 'bg-white/80 dark:bg-white/10 text-[#201B15]/80 dark:text-white/80 hover:bg-white dark:hover:bg-white/20 hover:text-[#201B15] dark:hover:text-white border border-[#201B15]/10 dark:border-white/10'
               }`}
             >
               {tab}
@@ -77,30 +77,30 @@ export default function MenuSection() {
           {menuItems[activeTab].map((item, idx) => (
             <div
               key={item.name}
-              className="bg-white/90 hover:bg-white p-6 sm:p-7 rounded-3xl border border-[#201B15]/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group"
+              className="bg-white/90 dark:bg-[#1E1914] hover:bg-white dark:hover:bg-[#251F19] p-6 sm:p-7 rounded-3xl border border-[#201B15]/10 dark:border-white/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between gap-4 mb-2">
                   <div className="flex items-center gap-2.5">
-                    <h3 className="font-display font-bold text-lg sm:text-xl text-[#201B15] group-hover:text-amber-900 transition-colors">
+                    <h3 className="font-display font-bold text-lg sm:text-xl text-[#201B15] dark:text-[#FCFAF6] group-hover:text-amber-900 dark:group-hover:text-amber-300 transition-colors">
                       {item.name}
                     </h3>
                     {item.tag && (
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold border border-amber-300/60">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-400/20 text-amber-900 dark:text-amber-300 font-bold border border-amber-300/60 dark:border-amber-400/30">
                         {item.tag}
                       </span>
                     )}
                   </div>
-                  <span className="font-mono font-bold text-base sm:text-lg text-[#201B15] shrink-0">
+                  <span className="font-mono font-bold text-base sm:text-lg text-[#201B15] dark:text-amber-300 shrink-0">
                     {item.price}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#201B15]/70 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#201B15]/70 dark:text-white/70 leading-relaxed transition-colors">
                   {item.desc}
                 </p>
               </div>
-              <div className="border-t border-[#201B15]/10 mt-4 pt-3 flex justify-end">
-                <span className="text-[11px] font-mono text-amber-800 font-semibold group-hover:translate-x-1 transition-transform">
+              <div className="border-t border-[#201B15]/10 dark:border-white/10 mt-4 pt-3 flex justify-end">
+                <span className="text-[11px] font-mono text-amber-800 dark:text-amber-400 font-semibold group-hover:translate-x-1 transition-transform">
                   Available in store & online →
                 </span>
               </div>
@@ -111,7 +111,7 @@ export default function MenuSection() {
         <div className="mt-12 sm:mt-16 text-center">
           <Link
             to="/menu"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#201B15] text-amber-300 hover:bg-[#342A21] font-semibold text-xs sm:text-sm transition-all shadow-md hover:shadow-xl active:scale-95"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#201B15] hover:bg-[#342A21] dark:bg-amber-400 dark:hover:bg-amber-300 text-amber-300 dark:text-[#201B15] font-semibold text-xs sm:text-sm transition-all shadow-md hover:shadow-xl active:scale-95"
           >
             <span>Explore Full Interactive Menu Page</span>
             <span>↗</span>
