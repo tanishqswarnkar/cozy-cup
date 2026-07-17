@@ -41,6 +41,8 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
       navigate('/about')
     } else if (item.label === 'Gallery') {
       navigate('/gallery')
+    } else if (item.label.includes('Brew Studio')) {
+      navigate('/brew-studio')
     } else if (item.label === 'Contact') {
       navigate('/contact')
     } else {
@@ -69,6 +71,7 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
   const navItems = [
     { label: 'Home', target: 'hero' },
     { label: 'Menu', target: 'menu' },
+    { label: 'Brew Studio ✨', target: 'brew-studio' },
     { label: 'About', target: 'about' },
     { label: 'Gallery', target: 'gallery' },
     { label: 'Contact', target: 'contact' },

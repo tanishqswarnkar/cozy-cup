@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Footer from '../components/Footer.jsx'
+import InteractiveTasteWheel from '../components/InteractiveTasteWheel.jsx'
 
 const fullMenuCategories = [
   'All Offerings',
@@ -379,6 +380,8 @@ export default function MenuPage({ onAddToCart }) {
           </motion.div>
         )}
       </div>
+
+      <InteractiveTasteWheel onAddToCart={onAddToCart} />
 
       <Footer />
     </div>

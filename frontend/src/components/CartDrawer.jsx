@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem, onCheckout }) {
+export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem, onCheckout, isProcessing }) {
   if (!isOpen) return null
 
   // Calculate total price from items strings like "₹650 / 340g" or "₹280 / cup"
@@ -161,16 +161,23 @@ export default function CartDrawer({ isOpen, onClose, cart, onUpdateQuantity, on
 
             <button
               type="button"
+              disabled={isProcessing}
               onClick={() => {
-                alert(`Proceeding to checkout with ${cart.length} coffee items (Total: ₹${(total + (total >= freeShippingThreshold ? 0 : 99)).toLocaleString('en-IN')})!`)
                 if (onCheckout) onCheckout()
               }}
-              className="w-full bg-[#201B15] hover:bg-[#322A21] dark:bg-amber-400 dark:hover:bg-amber-300 active:scale-[0.99] text-white dark:text-[#201B15] rounded-2xl py-4 font-semibold text-sm shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full bg-[#201B15] hover:bg-[#322A21] dark:bg-amber-400 dark:hover:bg-amber-300 disabled:opacity-75 active:scale-[0.99] text-white dark:text-[#201B15] rounded-2xl py-4 font-semibold text-sm shadow-xl transition-all flex items-center justify-center gap-2.5 cursor-pointer"
             >
-              <span>Proceed to Checkout</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
+              {isProcessing ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                  <span>Connecting Razorpay...</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-base">⚡</span>
+                  <span>Pay with Razorpay · ₹{(total + (total >= freeShippingThreshold ? 0 : 99)).toLocaleString('en-IN')}</span>
+                </>
+              )}
             </button>
           </div>
         )}
