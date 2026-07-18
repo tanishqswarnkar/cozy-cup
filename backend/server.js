@@ -19,6 +19,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.set('trust proxy', 1); // Required for Express to know it's on HTTPS behind Render's load balancer
 
 // Standard & Security middlewares
 const allowedOrigins = [
