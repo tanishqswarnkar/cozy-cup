@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_URL } from '../config';
 
 const AuthPage = ({ onAuthSuccess, onCancel }) => {
   // 'magic' | 'otp' | 'password'
@@ -18,8 +19,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
   const handleSocialLogin = async (provider) => {
     if (provider === 'Google') {
       setLoading(true);
-      setSuccessMsg('Redirecting to Google Sign-In...');
-      window.location.href = 'http://localhost:5001/api/auth/google';
+      window.location.href = `${API_URL}/api/auth/google`;
       return;
     }
 
@@ -29,7 +29,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
     try {
       const socialEmail = `member.${provider.toLowerCase()}_${Date.now().toString().slice(-4)}@cozycup.coffee`;
       const socialName = `${provider} Member`;
-      const res = await fetch('http://localhost:5001/api/auth/register', {
+      const res = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -64,7 +64,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
     setSuccessMsg(null);
 
     try {
-      const res = await fetch('http://localhost:5001/api/auth/send-otp', {
+      const res = await fetch(`${API_URL}/api/auth/send-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim() }),
@@ -95,7 +95,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
       try {
         const cleanEmail = email.trim();
         const userName = cleanEmail.split('@')[0];
-        const res = await fetch('http://localhost:5001/api/auth/register', {
+        const res = await fetch(`${API_URL}/api/auth/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
@@ -109,7 +109,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
         // Even if user already exists (400), log them in via login route
         let finalData = data;
         if (!res.ok && res.status === 400) {
-          const loginRes = await fetch('http://localhost:5001/api/auth/login', {
+          const loginRes = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -141,7 +141,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
       }
       setLoading(true);
       try {
-        const res = await fetch('http://localhost:5001/api/auth/verify-otp', {
+        const res = await fetch(`${API_URL}/api/auth/verify-otp`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
@@ -177,7 +177,7 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
       const payload = isRegistering ? { name: name.trim(), email: email.trim(), password: password.trim() } : { email: email.trim(), password: password.trim() };
 
       try {
-        const response = await fetch(`http://localhost:5001/api/auth/${endpoint}`, {
+        const response = await fetch(`${API_URL}/api/auth/${endpoint}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',

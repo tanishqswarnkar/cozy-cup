@@ -22,6 +22,8 @@ import PaymentSuccessModal from './components/PaymentSuccessModal.jsx'
 import DemoRazorpayModal from './components/DemoRazorpayModal.jsx'
 import GoldenEspressoGame from './components/GoldenEspressoGame.jsx'
 
+import { API_URL } from './config'
+
 export default function App() {
   const { isDark, toggleTheme } = useTheme()
   const [isLoading, setIsLoading] = useState(true)
@@ -81,7 +83,7 @@ export default function App() {
     // 2. Otherwise verify existing JWT Token or Cookie
     const token = localStorage.getItem('cozy_jwt_token');
 
-    fetch('http://localhost:5001/api/auth/me', {
+    fetch(`${API_URL}/api/auth/me`, {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -158,7 +160,7 @@ export default function App() {
 
     try {
       // Step 1: Create Order via Backend
-      const res = await fetch('http://localhost:5001/api/payments/create-order', {
+      const res = await fetch(`${API_URL}/api/payments/create-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -185,7 +187,7 @@ export default function App() {
         handler: async function (response) {
           try {
             // Step 3: Verify signature on Backend
-            const verifyRes = await fetch('http://localhost:5001/api/payments/verify-payment', {
+            const verifyRes = await fetch(`${API_URL}/api/payments/verify-payment`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -283,7 +285,7 @@ export default function App() {
         onOpenAuth={() => setShowAuth(true)}
         user={user}
         onLogout={() => {
-          fetch('http://localhost:5001/api/auth/logout', { method: 'POST', credentials: 'include' }).catch(() => {})
+          fetch(`${API_URL}/api/auth/logout`, { method: 'POST', credentials: 'include' }).catch(() => {})
           localStorage.removeItem('cozy_jwt_token')
           localStorage.removeItem('cozy_user')
           setUser(null)

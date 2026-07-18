@@ -119,10 +119,10 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          {/* Live Search Button */}
+          {/* Live Search Button - Hidden on mobile, accessible via Hamburger */}
           <button
             onClick={onOpenSearch}
-            className="bg-white/10 hover:bg-white/20 text-white hover:text-amber-300 rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-[13px] font-semibold transition-all flex items-center gap-1.5 border border-white/15 cursor-pointer shrink-0 shadow-sm group"
+            className="hidden md:flex bg-white/10 hover:bg-white/20 text-white hover:text-amber-300 rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-[13px] font-semibold transition-all items-center gap-1.5 border border-white/15 cursor-pointer shrink-0 shadow-sm group"
             title="Search Roasts & Treats (⌘K)"
           >
             <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,18 +132,18 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
             <span className="hidden md:inline-block bg-white/15 text-[10px] font-mono px-1.5 py-0.2 rounded text-white/80">⌘K</span>
           </button>
 
-          {/* Theme Mode Toggle Switch (Prominent Pill with Icon & Text) */}
+          {/* Theme Mode Toggle Switch - Hidden on mobile, accessible via Hamburger */}
           <button
             onClick={toggleTheme}
             aria-label="Toggle Dark/Light Theme"
             title={isDark ? "Switch to Warm Cream Light Mode ☀️" : "Switch to Obsidian Roastery Dark Mode 🌙"}
-            className="bg-white/10 hover:bg-amber-400 text-amber-300 hover:text-[#201B15] border border-white/20 hover:border-amber-400 rounded-full px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold transition-all duration-300 active:scale-95 flex items-center gap-1 sm:gap-1.5 shadow-sm shrink-0 cursor-pointer group select-none"
+            className="hidden md:flex bg-white/10 hover:bg-amber-400 text-amber-300 hover:text-[#201B15] border border-white/20 hover:border-amber-400 rounded-full px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold transition-all duration-300 active:scale-95 items-center gap-1 sm:gap-1.5 shadow-sm shrink-0 cursor-pointer group select-none"
           >
             <span className="text-sm sm:text-base leading-none group-hover:scale-110 transition-transform">
               {isDark ? '☀️' : '🌙'}
             </span>
             <span className="font-mono tracking-tight font-bold whitespace-nowrap">
-              {isDark ? 'Light Mode' : 'Dark Mode'}
+              {isDark ? 'Light' : 'Dark'}
             </span>
           </button>
 
