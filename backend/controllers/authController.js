@@ -434,7 +434,7 @@ export const googleCallback = async (req, res, next) => {
   try {
     const { code } = req.query;
     if (!code) {
-      return res.redirect((process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cozy-cup-five.vercel.app' : 'http://localhost:5173')) + '/?error=google_auth_canceled');
+      return res.redirect((process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cozy-cup-boats.vercel.app' : 'http://localhost:5173')) + '/?error=google_auth_canceled');
     }
 
     const clientId = process.env.GOOGLE_CLIENT_ID;
@@ -457,7 +457,7 @@ export const googleCallback = async (req, res, next) => {
     const tokenData = await tokenRes.json();
     if (!tokenRes.ok) {
       console.error('Google token exchange error:', tokenData);
-      return res.redirect((process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cozy-cup-five.vercel.app' : 'http://localhost:5173')) + '/?error=google_token_error');
+      return res.redirect((process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cozy-cup-boats.vercel.app' : 'http://localhost:5173')) + '/?error=google_token_error');
     }
 
     // 2. Fetch user info from Google
@@ -467,7 +467,7 @@ export const googleCallback = async (req, res, next) => {
     const googleProfile = await userRes.json();
 
     if (!googleProfile.email) {
-      return res.redirect((process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cozy-cup-five.vercel.app' : 'http://localhost:5173')) + '/?error=google_no_email');
+      return res.redirect((process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cozy-cup-boats.vercel.app' : 'http://localhost:5173')) + '/?error=google_no_email');
     }
 
     const cleanEmail = googleProfile.email.toLowerCase().trim();
@@ -545,11 +545,11 @@ export const googleCallback = async (req, res, next) => {
       token,
     };
 
-    const frontendRedirect = `${process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cozy-cup-five.vercel.app' : 'http://localhost:5173')}/?oauth_token=${encodeURIComponent(token)}&user=${encodeURIComponent(JSON.stringify(userPayload))}`;
+    const frontendRedirect = `${process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cozy-cup-boats.vercel.app' : 'http://localhost:5173')}/?oauth_token=${encodeURIComponent(token)}&user=${encodeURIComponent(JSON.stringify(userPayload))}`;
     res.redirect(frontendRedirect);
   } catch (error) {
     console.error('Google OAuth callback error:', error);
-    res.redirect((process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cozy-cup-five.vercel.app' : 'http://localhost:5173')) + '/?error=google_callback_failed');
+    res.redirect((process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cozy-cup-boats.vercel.app' : 'http://localhost:5173')) + '/?error=google_callback_failed');
   }
 };
 
