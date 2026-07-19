@@ -43,7 +43,7 @@ export default function Preloader({ onComplete }) {
           <img
             src="https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183863/cozy_cup_static/cozy-cup-logo.png"
             alt="Cozy Cup Logo"
-            className="w-full h-full object-contain scale-105 rounded-full"
+            className="w-full h-full object-contain rounded-full"
           />
         </div>
 

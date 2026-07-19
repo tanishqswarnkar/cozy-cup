@@ -94,11 +94,11 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
           onClick={handleLogoClick}
           className="flex items-center gap-2 sm:gap-3 group hover:opacity-95 transition-all shrink-0 cursor-pointer"
         >
-          <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-white/20 shadow-sm shrink-0 group-hover:scale-105 transition-transform bg-[#FCFAF6]">
+          <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-white/20 shadow-sm shrink-0 group-hover:scale-105 transition-transform bg-[#FCFAF6] flex items-center justify-center">
             <img 
               src="https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183863/cozy_cup_static/cozy-cup-logo.png" 
               alt="Cozy Cup Logo" 
-              className="w-full h-full object-contain scale-105"
+              className="w-full h-full object-contain p-1"
             />
           </div>
           <span className="font-display italic font-bold text-lg sm:text-2xl tracking-tight text-[#FCFAF6] group-hover:text-amber-300 transition-colors">
