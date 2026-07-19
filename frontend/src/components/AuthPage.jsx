@@ -228,11 +228,11 @@ const AuthPage = ({ onAuthSuccess, onCancel }) => {
 
           {/* Brand Header with Logo */}
           <div className="flex flex-col items-center justify-center text-center mb-8">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border border-white/25 shadow-lg bg-white/10">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border border-white/25 shadow-lg bg-white/10 flex items-center justify-center">
               <img
                 src="https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183863/cozy_cup_static/cozy-cup-logo.png"
                 alt="Cozy Cup Logo"
-                className="w-full h-full object-contain p-2"
+                className="w-full h-full object-cover"
               />
             </div>
             <h1 className="font-display italic font-bold text-4xl sm:text-[42px] text-gold tracking-tight leading-none drop-shadow-sm">

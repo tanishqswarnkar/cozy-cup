@@ -98,7 +98,7 @@ export default function Nav({ onOpenAuth, user, onLogout, onOpenCart, onOpenSear
             <img 
               src="https://res.cloudinary.com/hru3yyo1/image/upload/f_auto,q_auto/v1784183863/cozy_cup_static/cozy-cup-logo.png" 
               alt="Cozy Cup Logo" 
-              className="w-full h-full object-contain p-1"
+              className="w-full h-full object-cover"
             />
           </div>
           <span className="font-display italic font-bold text-lg sm:text-2xl tracking-tight text-[#FCFAF6] group-hover:text-amber-300 transition-colors">
